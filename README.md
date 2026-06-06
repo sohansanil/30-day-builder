@@ -2,7 +2,7 @@
 
 > From student to builder — learning modern software development, AI-assisted coding, product thinking, and deployment through consistent hands-on building.
 
-[![GitHub last commit](https://img.shields.io/github/last-commit/YOUR_USERNAME/30-day-builder)](https://github.com/YOUR_USERNAME/30-day-builder)
+[![GitHub last commit](https://img.shields.io/github/last-commit/sohansanil/30-day-builder)](https://github.com/sohansanil/30-day-builder)
 
 ---
 
