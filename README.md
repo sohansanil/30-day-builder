@@ -106,7 +106,7 @@ Each day gets a learning log in the `days/` folder documenting:
 
 ## 🤝 Connect
 
-- **LinkedIn**: [Your LinkedIn URL]
+- **LinkedIn**: www.linkedin.com/in/sohan-sanil-77b8b8406
 - **Portfolio**: [Coming Day 2!]
 
 ---
