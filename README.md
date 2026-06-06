@@ -23,55 +23,53 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 ### Phase 1: Foundations (Days 1–7)
 > Developer toolkit, Git, HTML/CSS/JS, deployment
 
-| Day | Focus | What I Learned | Project |
+| Day | Focus | What I Learned | Project / Output |
 |-----|-------|---------------|---------|
 | 1 | Dev Environment & First Commit | Git workflow, project structure, Markdown | This repo! |
-| 2 | HTML, CSS & How the Web Works | | |
+| 2 | HTML, CSS & How the Web Works | CSS Grid/Subgrid, Container Queries, light-dark() theming | [day-02.md](file:///Users/sohansanil/Documents/linkedin/30-day-builder/days/day-02.md) / [portfolio](file:///Users/sohansanil/Documents/linkedin/30-day-builder/projects/portfolio/index.html) |
 | 3 | JavaScript & Interactivity | | |
 | 4 | Deploy to the Internet | | |
 | 5 | APIs: How Apps Talk | | |
 | 6 | Git Deep Dive | | |
 | 7 | Phase 1 Retrospective | | |
 
-### Phase 2: Frontend & Data (Days 8–14)
-> React, data visualization, FastAPI, databases, authentication
+### Phase 2: Data Products (Days 8–14)
+> React, data visualization, simulation, FastAPI, databases, authentication
 
 | Day | Focus | What I Learned | Project |
 |-----|-------|---------------|---------|
-| 8 | React & Components | | |
-| 9 | Data Visualization | | |
-| 10 | Multi-Page Apps | | |
-| 11 | Python Backend (FastAPI) | | |
-| 12 | Databases (Supabase) | | |
-| 13 | Authentication | | |
-| 14 | Phase 2 Retrospective | | |
+| 8 | React & Components | React component model, state, JSX | React Portfolio |
+| 9-10 | IPL Match Simulator | Monte Carlo simulations, Recharts viz | IPL Simulator MVP |
+| 11 | FastAPI Backends | FastAPI, API design, server-side simulation | IPL FastAPI API |
+| 12 | Databases & Supabase | SQL queries, Supabase DB modeling | Startup Explorer DB |
+| 13 | Authentication | Supabase Auth, protected routing | Auth Startup Explorer |
+| 14 | Phase 2 Retrospective | Deploying full-stack web products | Live Deployment |
 
-### Phase 3: Full-Stack Products (Days 15–22)
-> Product thinking, Chrome extensions, AI integration, testing
-
-| Day | Focus | What I Learned | Project |
-|-----|-------|---------------|---------|
-| 15 | Product Thinking | | |
-| 16 | Build StudyTracker MVP | | |
-| 17 | Chrome Extension | | |
-| 18 | Data Science & Analytics | | |
-| 19 | Automation & Emails | | |
-| 20 | AI/LLM Integration | | |
-| 21 | Testing | | |
-| 22 | Phase 3 Ship Day | | |
-
-### Phase 4: Advanced & Capstone (Days 23–30)
-> Mobile/PWA, real-time, RAG, open source, capstone
+### Phase 3: AI-Powered Products (Days 15–22)
+> NLP, structured scoring, AI integration, anomaly detection, Chrome extensions
 
 | Day | Focus | What I Learned | Project |
 |-----|-------|---------------|---------|
-| 23 | Mobile (PWA) | | |
-| 24 | Real-Time Features | | |
-| 25 | RAG & Document AI | | |
-| 26 | Open Source | | |
-| 27 | Capstone Design | | |
-| 28-29 | Capstone Build Sprint | | |
-| 30 | Portfolio Day | | |
+| 15 | Product Thinking | MVP scoping, wireframing, feature priorities | ResumeAI Design |
+| 16-17 | ResumeAI Analyzer | PDF parsing, NLP keyword extraction, Gemini API | ResumeAI MVP |
+| 18 | Product Analytics | Data seeding, user metrics, admin dashboard | Admin Dashboard |
+| 19 | Smart Expense Tracker | Spend forecasting, anomaly detection | Expense Tracker |
+| 20 | Chrome Extensions | Manifest V3, site tracking browser APIs | FocusLens Extension |
+| 21 | Testing & Quality | Unit tests, mock API requests | Vitest |
+| 22 | Phase 3 Ship Day | Demo videos, documentation polish | Live Deployment |
+
+### Phase 4: Advanced Products & Capstone (Days 23–30)
+> Progressive Web Apps, collaborative filtering, RAG, WebSockets, capstone
+
+| Day | Focus | What I Learned | Project |
+|-----|-------|---------------|---------|
+| 23 | PWA & Offline Support | Service workers, IndexedDB, offline sync | PWA Expense Tracker |
+| 24 | Recommendation Engines | Content-based & collaborative filtering | CourseCompass |
+| 25 | Document AI & RAG | Embeddings, vector search, retrieval loops | ResearchBuddy RAG |
+| 26 | Real-time Data | WebSockets, Supabase Realtime | Live Predictions |
+| 27 | Open Source & Community | Contributing.md, issues, community contribution | OS PR |
+| 28-29 | Capstone Sprint | End-to-end data product sprint | Flagship Product |
+| 30 | Portfolio & Prep | Pitching projects, GitHub profile, interview stories | Portfolio Day |
 
 ## 🛠️ Tech Stack (Cumulative)
 
