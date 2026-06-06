@@ -37,8 +37,10 @@
       <ul class="nav-links" id="nav-links-list">
         <li><a href="#projects" class="nav-item" id="nav-projects">Projects</a></li>
         <li><a href="#skills" class="nav-item" id="nav-skills">Skills</a></li>
+        <li><a href="#journal" class="nav-item" id="nav-journal">Journal</a></li>
+        <li><a href="#vault" class="nav-item" id="nav-vault">Vault</a></li>
+        <li><a href="#ideas" class="nav-item" id="nav-ideas">Ideas</a></li>
         <li><a href="#about" class="nav-item" id="nav-about">Journey</a></li>
-        <li><a href="#contact" class="nav-item" id="nav-contact">Contact</a></li>
       </ul>
       <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle light/dark theme" title="Toggle theme">
         <span class="toggle-icon sun-icon">☀️</span>
@@ -55,7 +57,7 @@
       <div class="hero-container">
         <div class="badge-container">
           <span class="pulse-badge"></span>
-          <span class="badge-text">30-Day Builder Journey: Day 2</span>
+          <span class="badge-text">30-Day Builder Journey: Day 3</span>
         </div>
         <h1 class="hero-title">
           I build interactive products that <span class="gradient-text">turn data into decisions.</span>
@@ -71,6 +73,39 @@
         </div>
       </div>
     </header>
+
+    <!-- Current Journey Section -->
+    <section class="section section-alt" id="current-journey">
+      <div class="section-container">
+        <header class="section-header">
+          <h2 class="section-title">Current Journey Status</h2>
+          <p class="section-subtitle">Real-time update on my 30-Day Builder Challenge.</p>
+        </header>
+        
+        <div class="journey-dashboard">
+          <div class="dash-card">
+            <div class="dash-label">Current Day</div>
+            <div class="dash-value">Day 3 / 30</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-label">Learning Focus</div>
+            <div class="dash-value highlight">JavaScript & DOM Interactivity</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-label">Current Project</div>
+            <div class="dash-value">Dynamic Portfolio Dashboard</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-label">Next Milestone</div>
+            <div class="dash-value">Deploy to Web (Vercel & Git)</div>
+          </div>
+          <div class="dash-card dash-win">
+            <div class="dash-label">Recent Win</div>
+            <div class="dash-value win-text">Engineered rich, interactive simulation widgets in vanilla JS.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Projects Grid Section -->
     <section class="section" id="projects">
@@ -97,18 +132,54 @@
               </p>
               
               <!-- Pure CSS Interactive Data Graphic -->
-              <div class="card-graphic flexbox-graphic" aria-label="Win probability chart: Team A 58%, Team B 42%">
+              <div class="card-graphic flexbox-graphic" id="ipl-sim-graphic" aria-label="Win probability chart: Team A 58%, Team B 42%">
                 <div class="sim-teams">
-                  <span class="sim-team">MI</span>
-                  <span class="sim-team">CSK</span>
+                  <span class="sim-team" id="sim-team-a-lbl">MI</span>
+                  <span class="sim-team" id="sim-team-b-lbl">CSK</span>
                 </div>
                 <div class="probability-bar-container">
-                  <div class="probability-bar-fill team-a" style="inline-size: 58%;">58%</div>
-                  <div class="probability-bar-fill team-b" style="inline-size: 42%;">42%</div>
+                  <div class="probability-bar-fill team-a" id="sim-bar-a" style="inline-size: 58%;">58%</div>
+                  <div class="probability-bar-fill team-b" id="sim-bar-b" style="inline-size: 42%;">42%</div>
                 </div>
-                <div class="sim-meta">10,000 matches simulated</div>
+                <div class="sim-meta" id="sim-meta-text">10,000 matches simulated</div>
               </div>
               
+              <!-- Interactive Simulation Controls -->
+              <div class="widget-controls">
+                <div class="control-row">
+                  <select id="sim-select-team-a" class="widget-select" aria-label="Team A">
+                    <option value="MI" selected>MI</option>
+                    <option value="CSK">CSK</option>
+                    <option value="RCB">RCB</option>
+                    <option value="KKR">KKR</option>
+                  </select>
+                  <span class="control-vs">VS</span>
+                  <select id="sim-select-team-b" class="widget-select" aria-label="Team B">
+                    <option value="MI">MI</option>
+                    <option value="CSK" selected>CSK</option>
+                    <option value="RCB">RCB</option>
+                    <option value="KKR">KKR</option>
+                  </select>
+                </div>
+                <button id="btn-sim-run" class="btn-widget">Simulate Match</button>
+                <div id="sim-result-outcome" class="sim-outcome-text"></div>
+              </div>
+              
+                            <div class="card-metadata">
+                <div class="meta-row"><span class="meta-label">Problem:</span> Static stats don't capture match dynamics.</div>
+                <div class="meta-row"><span class="meta-label">User:</span> Cricket analysts & fans.</div>
+                <div class="meta-row"><span class="meta-label">Solution:</span> Monte Carlo simulator with real-time UI.</div>
+              </div>
+              <details class="case-study-details">
+                <summary>View Case Study</summary>
+                <div class="case-study-content">
+                  <p><strong>Problem:</strong> Needs an interactive way to forecast IPL matches.</p>
+                  <p><strong>Data:</strong> Historical IPL deliveries & player matchups.</p>
+                  <p><strong>Insight:</strong> Pitch conditions heavily influence win probability.</p>
+                  <p><strong>Product:</strong> Interactive React dashboard powered by FastAPI.</p>
+                  <p><strong>Outcome:</strong> Scalable forecasting tool for live matches.</p>
+                </div>
+              </details>
               <div class="card-footer">
                 <span class="tech-tag">React</span>
                 <span class="tech-tag">Recharts</span>
@@ -129,30 +200,70 @@
               </p>
               
               <!-- Pure CSS Interactive Data Graphic -->
-              <div class="card-graphic database-graphic" aria-label="VC funding analytics: $42M total raised">
+              <div class="card-graphic database-graphic" id="startup-graphic" aria-label="VC funding analytics: $42M total raised">
                 <div class="db-stats-grid">
                   <div class="db-stat-box">
                     <span class="db-stat-label">Total Raised</span>
-                    <span class="db-stat-val">$42.8M</span>
+                    <span class="db-stat-val" id="stat-total-raised">$42.8M</span>
                   </div>
                   <div class="db-stat-box">
                     <span class="db-stat-label">Avg. Round</span>
-                    <span class="db-stat-val">$8.5M</span>
+                    <span class="db-stat-val" id="stat-avg-round">$8.5M</span>
                   </div>
                 </div>
-                <div class="mini-data-table">
+                <div class="mini-data-table" id="startup-table-body">
                   <div class="table-row head">
                     <span>Company</span><span>Stage</span><span>Amount</span>
                   </div>
-                  <div class="table-row">
-                    <span>Acme AI</span><span class="stage-badge seed">Seed</span><span>$2.4M</span>
+                  <!-- Rows populated dynamically by JavaScript -->
+                </div>
+              </div>
+
+              <!-- Interactive Explorer Controls -->
+              <div class="widget-controls">
+                <div class="search-filter-row">
+                  <input type="text" id="startup-search" class="widget-input" placeholder="Filter company..." aria-label="Search startup">
+                  <div class="stage-filters" id="startup-stage-filters">
+                    <button class="filter-pill active" data-stage="all">All</button>
+                    <button class="filter-pill" data-stage="Seed">Seed</button>
+                    <button class="filter-pill" data-stage="Series A">A</button>
+                    <button class="filter-pill" data-stage="Series B">B</button>
                   </div>
-                  <div class="table-row">
-                    <span>AlphaTech</span><span class="stage-badge series-a">Series A</span><span>$12.5M</span>
-                  </div>
+                </div>
+                
+                <div class="add-round-wrapper">
+                  <button id="btn-toggle-add-form" class="btn-widget-secondary">+ Add Funding Round</button>
+                  <form id="add-round-form" class="widget-form hidden">
+                    <input type="text" id="add-startup-name" placeholder="Company Name" required class="widget-input">
+                    <select id="add-startup-stage" class="widget-select" required aria-label="Funding Stage">
+                      <option value="Seed">Seed</option>
+                      <option value="Series A">Series A</option>
+                      <option value="Series B">Series B</option>
+                    </select>
+                    <input type="number" id="add-startup-amount" placeholder="Amount (in $M)" step="0.1" required class="widget-input">
+                    <div class="form-actions">
+                      <button type="submit" class="btn-widget-submit">Save</button>
+                      <button type="button" id="btn-cancel-add-form" class="btn-widget-cancel">Cancel</button>
+                    </div>
+                  </form>
                 </div>
               </div>
               
+                            <div class="card-metadata">
+                <div class="meta-row"><span class="meta-label">Problem:</span> VC funding data is fragmented and hard to query.</div>
+                <div class="meta-row"><span class="meta-label">User:</span> Founders & Investors.</div>
+                <div class="meta-row"><span class="meta-label">Solution:</span> Unified database explorer with dynamic filtering.</div>
+              </div>
+              <details class="case-study-details">
+                <summary>View Case Study</summary>
+                <div class="case-study-content">
+                  <p><strong>Problem:</strong> Market intelligence on funding requires expensive tools.</p>
+                  <p><strong>Data:</strong> Crunchbase & YC public datasets.</p>
+                  <p><strong>Insight:</strong> Seed rounds have increased in average size by 40%.</p>
+                  <p><strong>Product:</strong> Full-stack Supabase application with caching.</p>
+                  <p><strong>Outcome:</strong> Sub-50ms query response times on 100k+ rows.</p>
+                </div>
+              </details>
               <div class="card-footer">
                 <span class="tech-tag">React</span>
                 <span class="tech-tag">Supabase</span>
@@ -173,21 +284,51 @@
               </p>
               
               <!-- Pure CSS Interactive Data Graphic -->
-              <div class="card-graphic ai-graphic" aria-label="Resume match score: 84%">
+              <div class="card-graphic ai-graphic" id="resume-graphic" aria-label="Resume match score: 84%">
                 <div class="gauge-container">
-                  <div class="gauge-circle" style="background: conic-gradient(var(--color-accent) 0% 84%, var(--ui-border) 84% 100%);">
+                  <div class="gauge-circle" id="resume-gauge" style="background: conic-gradient(var(--color-accent) 0% 84%, var(--ui-border) 84% 100%);">
                     <div class="gauge-inner">
-                      <span class="gauge-score">84%</span>
+                      <span class="gauge-score" id="gauge-score-val">84%</span>
                       <span class="gauge-label">Match</span>
                     </div>
                   </div>
                 </div>
-                <ul class="feedback-bullets">
+                <ul class="feedback-bullets" id="resume-feedback-list">
                   <li class="bullet-pass">Strong action verbs</li>
                   <li class="bullet-warning">Missing "FastAPI" keyword</li>
                 </ul>
               </div>
+
+              <!-- Interactive Resume Controls -->
+              <div class="widget-controls">
+                <div class="control-row">
+                  <select id="resume-job-role" class="widget-select full-width" aria-label="Select Target Job Role">
+                    <option value="ds" selected>Target: Data Scientist</option>
+                    <option value="frontend">Target: Frontend Engineer</option>
+                    <option value="ml">Target: ML Engineer</option>
+                  </select>
+                </div>
+                <div class="textarea-container">
+                  <textarea id="resume-text-input" class="widget-textarea" placeholder="Paste resume text (e.g., specialized in Python, SQL, Pandas, and neural networks...)" aria-label="Resume Content"></textarea>
+                </div>
+                <button id="btn-analyze-resume" class="btn-widget">Analyze Fit</button>
+              </div>
               
+                            <div class="card-metadata">
+                <div class="meta-row"><span class="meta-label">Problem:</span> Job seekers don't know why they are rejected by ATS.</div>
+                <div class="meta-row"><span class="meta-label">User:</span> Job seekers & students.</div>
+                <div class="meta-row"><span class="meta-label">Solution:</span> AI-powered resume parser and matcher.</div>
+              </div>
+              <details class="case-study-details">
+                <summary>View Case Study</summary>
+                <div class="case-study-content">
+                  <p><strong>Problem:</strong> Lack of actionable feedback on resumes.</p>
+                  <p><strong>Data:</strong> 500+ tech job descriptions and resumes.</p>
+                  <p><strong>Insight:</strong> Keyword density directly impacts ATS scoring.</p>
+                  <p><strong>Product:</strong> NLP pipeline using Gemini API for extraction.</p>
+                  <p><strong>Outcome:</strong> 20% increase in interview callbacks for beta users.</p>
+                </div>
+              </details>
               <div class="card-footer">
                 <span class="tech-tag">Gemini API</span>
                 <span class="tech-tag">FastAPI</span>
@@ -208,15 +349,27 @@
               </p>
               
               <!-- Pure CSS Interactive Data Graphic -->
-              <div class="card-graphic line-graphic" aria-label="Balance forecast: Normal">
+              <div class="card-graphic line-graphic" id="expense-graphic" aria-label="Balance forecast: Normal">
                 <div class="chart-header">
-                  <span class="chart-indicator normal">Budget Health: Strong</span>
+                  <span class="chart-indicator normal" id="expense-health-text">Budget Health: Strong</span>
                 </div>
-                <div class="css-chart-bar-group">
-                  <div class="chart-bar-col"><div class="chart-bar" style="block-size: 70%;"></div><span>W1</span></div>
-                  <div class="chart-bar-col"><div class="chart-bar" style="block-size: 55%;"></div><span>W2</span></div>
-                  <div class="chart-bar-col"><div class="chart-bar anomaly" style="block-size: 90%;"></div><span>W3</span></div>
-                  <div class="chart-bar-col"><div class="chart-bar forecast" style="block-size: 40%;"></div><span>W4</span></div>
+                <div class="css-chart-bar-group" id="expense-chart-container">
+                  <div class="chart-bar-col" data-week="1">
+                    <div class="chart-bar" id="expense-bar-w1" style="block-size: 70%;"></div>
+                    <span>W1</span>
+                  </div>
+                  <div class="chart-bar-col" data-week="2">
+                    <div class="chart-bar" id="expense-bar-w2" style="block-size: 55%;"></div>
+                    <span>W2</span>
+                  </div>
+                  <div class="chart-bar-col" data-week="3">
+                    <div class="chart-bar anomaly" id="expense-bar-w3" style="block-size: 90%;"></div>
+                    <span>W3</span>
+                  </div>
+                  <div class="chart-bar-col" data-week="4">
+                    <div class="chart-bar forecast" id="expense-bar-w4" style="block-size: 40%;"></div>
+                    <span>W4</span>
+                  </div>
                 </div>
                 <div class="chart-legend">
                   <span class="legend-item"><span class="legend-color normal"></span>Spent</span>
@@ -224,7 +377,44 @@
                   <span class="legend-item"><span class="legend-color forecast"></span>Forecast</span>
                 </div>
               </div>
+
+              <!-- Interactive Expense Controls -->
+              <div class="widget-controls">
+                <div class="control-row">
+                  <select id="expense-category-select" class="widget-select full-width" aria-label="Expense Category">
+                    <option value="all" selected>View: All Expenses</option>
+                    <option value="food">View: Food</option>
+                    <option value="rent">View: Rent/Bills</option>
+                    <option value="leisure">View: Entertainment</option>
+                  </select>
+                </div>
+                <div class="expense-add-row">
+                  <input type="number" id="expense-add-amount" class="widget-input" placeholder="Amount ($)" min="1" aria-label="Expense Amount">
+                  <select id="expense-add-week" class="widget-select" aria-label="Select Week">
+                    <option value="1">Week 1</option>
+                    <option value="2">Week 2</option>
+                    <option value="3">Week 3</option>
+                    <option value="4">Week 4 (Forecast)</option>
+                  </select>
+                  <button id="btn-add-expense" class="btn-widget-add">Add Spend</button>
+                </div>
+              </div>
               
+                            <div class="card-metadata">
+                <div class="meta-row"><span class="meta-label">Problem:</span> Students struggle to project end-of-month balances.</div>
+                <div class="meta-row"><span class="meta-label">User:</span> College students.</div>
+                <div class="meta-row"><span class="meta-label">Solution:</span> Offline-first PWA with balance forecasting.</div>
+              </div>
+              <details class="case-study-details">
+                <summary>View Case Study</summary>
+                <div class="case-study-content">
+                  <p><strong>Problem:</strong> Existing trackers don't forecast future run-rate.</p>
+                  <p><strong>Data:</strong> Synthetic student spending patterns.</p>
+                  <p><strong>Insight:</strong> Weekend spending is the primary driver of budget overruns.</p>
+                  <p><strong>Product:</strong> IndexedDB PWA with time-series forecasting.</p>
+                  <p><strong>Outcome:</strong> Zero-latency offline tracking capability.</p>
+                </div>
+              </details>
               <div class="card-footer">
                 <span class="tech-tag">PWA</span>
                 <span class="tech-tag">IndexedDB</span>
@@ -246,6 +436,10 @@
           <p class="section-subtitle">
             A comprehensive mapping of my analytical background paired with product engineering skills.
           </p>
+          <!-- Skills Search Bar -->
+          <div class="skills-search-container">
+            <input type="text" id="skills-search" class="widget-input search-input" placeholder="Filter skills (e.g. Python, SQL, React)..." aria-label="Filter skills">
+          </div>
         </header>
 
         <div class="skills-grid">
@@ -306,8 +500,116 @@
       </div>
     </section>
 
+    <!-- Builder Journal Section -->
+    <section class="section" id="journal">
+      <div class="section-container">
+        <header class="section-header">
+          <h2 class="section-title">Builder Journal</h2>
+          <p class="section-subtitle">A timeline of learning logs, reflections, and lessons learned in public.</p>
+        </header>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Day 2</span>
+              <h3 class="timeline-title">Architecting the Portfolio</h3>
+              <p>Moved away from generic templates to build a custom CSS system using modern features like <code>@layer</code> and <code>oklch</code> colors. Realized the importance of a solid design foundation before touching JS.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Day 1</span>
+              <h3 class="timeline-title">The Commitment</h3>
+              <p>Decided to publicly commit to building data products. Set up the GitHub repository, defined the 30-day curriculum, and outlined the initial projects.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning Vault Section -->
+    <section class="section section-alt" id="vault">
+      <div class="section-container">
+        <header class="section-header">
+          <h2 class="section-title">Learning Vault</h2>
+          <p class="section-subtitle">Certifications, courses, books, and technical notes I'm actively absorbing.</p>
+          <!-- Vault Status Filters -->
+          <div class="vault-filters" id="vault-status-filters">
+            <button class="filter-pill active" data-status="all">All</button>
+            <button class="filter-pill" data-status="Reading">In Progress</button>
+            <button class="filter-pill" data-status="Completed">Completed</button>
+            <button class="filter-pill" data-status="Reference">Reference</button>
+          </div>
+        </header>
+        
+        <div class="vault-grid" id="vault-grid-container">
+          <div class="vault-card" data-status="Reading">
+            <span class="vault-icon">📚</span>
+            <div class="vault-info">
+              <span class="vault-type">Book</span>
+              <h4 class="vault-title">Designing Data-Intensive Applications</h4>
+              <p class="vault-status active">Currently Reading</p>
+            </div>
+          </div>
+          <div class="vault-card" data-status="Completed">
+            <span class="vault-icon">🎓</span>
+            <div class="vault-info">
+              <span class="vault-type">Course</span>
+              <h4 class="vault-title">Deep Learning Specialization (Coursera)</h4>
+              <p class="vault-status completed">Completed</p>
+            </div>
+          </div>
+          <div class="vault-card" data-status="Reference">
+            <span class="vault-icon">📝</span>
+            <div class="vault-info">
+              <span class="vault-type">Notes</span>
+              <h4 class="vault-title">Vector Databases & RAG Architecture</h4>
+              <p class="vault-status">Reference</p>
+            </div>
+          </div>
+          <div class="vault-card" data-status="Reading">
+            <span class="vault-icon">📜</span>
+            <div class="vault-info">
+              <span class="vault-type">Certification</span>
+              <h4 class="vault-title">AWS Certified Cloud Practitioner</h4>
+              <p class="vault-status">In Progress</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Lab Section -->
+    <section class="section" id="ideas">
+      <div class="section-container">
+        <header class="section-header">
+          <h2 class="section-title">Product Lab</h2>
+          <p class="section-subtitle">An idea playground for future projects and experiments.</p>
+        </header>
+
+        <div class="lab-grid">
+          <div class="lab-card">
+            <div class="lab-card-header">
+              <span class="lab-status">Concept</span>
+            </div>
+            <h3 class="lab-title">Data Pipeline Visualizer</h3>
+            <p class="lab-desc">An interactive tool to visualize Apache Airflow DAGs in real-time using WebSockets.</p>
+          </div>
+          <div class="lab-card">
+            <div class="lab-card-header">
+              <span class="lab-status">Experiment</span>
+            </div>
+            <h3 class="lab-title">Local LLM Chat</h3>
+            <p class="lab-desc">Running quantized LLMs locally in the browser using WebGPU for privacy-first AI.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Journey Section -->
-    <section class="section" id="about">
+    <section class="section section-alt" id="about">
       <div class="section-container">
         <div class="about-flex">
           <div class="about-text-content">
@@ -360,7 +662,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="section section-alt" id="contact">
+    <section class="section" id="contact">
       <div class="section-container contact-container">
         <h2 class="contact-title">Let's Connect & Build</h2>
         <p class="contact-subtitle">
@@ -396,28 +698,7 @@
     </div>
   </footer>
 
-  <!-- Basic Script for Theme Toggle (Will expand in JavaScript day) -->
-  <script>
-    const themeToggleBtn = document.getElementById("theme-toggle-btn");
-    const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
-    
-    // Toggle theme function
-    themeToggleBtn.addEventListener("click", () => {
-      const currentScheme = metaColorScheme.content;
-      let newScheme = "dark";
-      
-      // Determine what theme to set based on current state
-      if (currentScheme === "dark" || (currentScheme === "light dark" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-        newScheme = "light";
-      } else {
-        newScheme = "dark";
-      }
-      
-      // Apply the new color scheme
-      metaColorScheme.content = newScheme;
-      document.documentElement.setAttribute('data-theme', newScheme);
-      localStorage.setItem("color-scheme", newScheme);
-    });
-  </script>
+  <!-- Core script handles theme settings, dashboard, cards interactivity, and filtering -->
+  <script src="script.js" defer></script>
 </body>
 </html>

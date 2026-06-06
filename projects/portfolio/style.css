@@ -1192,3 +1192,515 @@
     inline-size: 100%;
   }
 }
+
+@layer components {
+  /* Current Journey Dashboard */
+  .journey-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+  .dash-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-md);
+    flex: 1 1 200px;
+    box-shadow: 0 4px 15px var(--color-shadow);
+  }
+  .dash-card.dash-win {
+    flex: 1 1 100%;
+    background-color: light-dark(rgba(52, 211, 153, 0.05), rgba(52, 211, 153, 0.05));
+    border-color: rgba(52, 211, 153, 0.3);
+  }
+  .dash-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xs);
+  }
+  .dash-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  .dash-value.highlight {
+    color: var(--color-accent);
+  }
+  .dash-value.win-text {
+    color: #34d399;
+  }
+
+  /* Enhanced Project Cards */
+  .card-metadata {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    font-size: 0.85rem;
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px dashed var(--color-border);
+  }
+  .meta-row {
+    color: var(--color-text-secondary);
+  }
+  .meta-label {
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-right: var(--spacing-xs);
+  }
+  
+  .case-study-details {
+    margin-top: var(--spacing-md);
+    background: var(--color-surface-hover);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-sm);
+    font-size: 0.85rem;
+  }
+  .case-study-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-accent);
+    outline: none;
+  }
+  .case-study-content {
+    margin-top: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    color: var(--color-text-secondary);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-sm);
+  }
+
+  /* Builder Journal Timeline */
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: var(--spacing-lg) 0;
+    padding-left: var(--spacing-xl);
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: var(--spacing-xl);
+  }
+  .timeline-dot {
+    position: absolute;
+    left: calc(var(--spacing-xl) * -1);
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    border: 3px solid var(--color-bg);
+  }
+  .timeline-date {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+  }
+  .timeline-title {
+    font-size: 1.2rem;
+    margin: var(--spacing-xs) 0;
+    color: var(--color-text-primary);
+  }
+  .timeline-content p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Learning Vault */
+  .vault-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-md);
+  }
+  .vault-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-md);
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    box-shadow: 0 4px 10px var(--color-shadow);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .vault-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent);
+  }
+  .vault-icon {
+    font-size: 2rem;
+  }
+  .vault-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .vault-type {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+  }
+  .vault-title {
+    font-size: 1rem;
+    margin: 2px 0;
+    color: var(--color-text-primary);
+  }
+  .vault-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+  .vault-status.active { color: #f59e0b; }
+  .vault-status.completed { color: #10b981; }
+
+  /* Product Lab */
+  .lab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+  }
+  .lab-card {
+    background: var(--color-bg);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    transition: border-color 0.2s ease;
+  }
+  .lab-card:hover {
+    border-color: var(--color-text-secondary);
+    border-style: solid;
+  }
+  .lab-card-header {
+    margin-bottom: var(--spacing-sm);
+  }
+  .lab-status {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    background: var(--color-surface-hover);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+  }
+  .lab-title {
+    font-size: 1.15rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-primary);
+  }
+  .lab-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* --- Day 3: Interactive Component Overrides --- */
+  
+  .widget-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-block-start: var(--spacing-md);
+    padding-block-start: var(--spacing-md);
+    border-top: 1px dashed var(--color-border);
+  }
+  
+  .control-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+  
+  .control-vs {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.05em;
+    padding-inline: var(--spacing-xs);
+  }
+
+  .widget-select, .widget-input, .widget-textarea {
+    background-color: light-dark(#ffffff, #161b22);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.85rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    inline-size: 100%;
+    outline: none;
+  }
+  
+  .widget-select:focus, .widget-input:focus, .widget-textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.15);
+  }
+  
+  .widget-textarea {
+    min-block-size: 70px;
+    resize: vertical;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+  
+  .full-width {
+    inline-size: 100%;
+  }
+
+  .btn-widget {
+    background-color: var(--color-accent);
+    color: light-dark(white, #0e1217);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    inline-size: 100%;
+    text-align: center;
+  }
+  
+  .btn-widget:hover:not(:disabled) {
+    background-color: light-dark(oklch(45% 0.16 200), oklch(80% 0.14 190));
+  }
+  
+  .btn-widget:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  
+  .btn-widget:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .btn-widget-secondary {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    inline-size: 100%;
+    margin-block-start: var(--spacing-xs);
+  }
+  
+  .btn-widget-secondary:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text-primary);
+  }
+
+  .search-filter-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .stage-filters, .vault-filters {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-block-start: 2px;
+  }
+  
+  .filter-pill {
+    background: var(--color-surface-hover);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    padding: 2px 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .filter-pill:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text-primary);
+  }
+  
+  .filter-pill.active {
+    background-color: var(--color-accent);
+    color: light-dark(white, #0e1217);
+    border-color: var(--color-accent);
+  }
+
+  .add-round-wrapper {
+    margin-block-start: var(--spacing-xs);
+  }
+  
+  .widget-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    background: var(--color-surface-hover);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-sm);
+    margin-block-start: var(--spacing-xs);
+    transition: all 0.2s ease;
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+  }
+  
+  .btn-widget-submit {
+    flex: 1;
+    background: var(--color-accent);
+    color: light-dark(white, #0e1217);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs);
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  
+  .btn-widget-cancel {
+    flex: 1;
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs);
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  .sim-outcome-text {
+    font-size: 0.8rem;
+    color: var(--color-text-primary);
+    margin-block-start: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: var(--color-surface-hover);
+    border-left: 2.5px solid var(--color-accent);
+    border-radius: 2px;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+    display: none;
+  }
+  
+  .sim-outcome-text.active {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+  }
+  
+  .row-entry-anim {
+    animation: rowFadeIn 0.3s ease forwards;
+  }
+  
+  @keyframes rowFadeIn {
+    from { opacity: 0; transform: translateY(3px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .spinning-gauge {
+    animation: gaugeSpin 1.2s linear infinite;
+  }
+  
+  @keyframes gaugeSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .expense-add-row {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-block-start: var(--spacing-xs);
+  }
+  
+  .btn-widget-add {
+    background-color: var(--color-accent);
+    color: light-dark(white, #0e1217);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .btn-widget-add:hover {
+    background-color: light-dark(oklch(45% 0.16 200), oklch(80% 0.14 190));
+  }
+
+  .chart-tooltip {
+    position: fixed;
+    background: rgba(14, 18, 23, 0.95);
+    color: white;
+    border: 1px solid #30363d;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.75rem;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.15s ease;
+  }
+  
+  .hidden {
+    display: none !important;
+  }
+
+  /* Transition for dynamic resizing of bars */
+  .chart-bar {
+    transition: block-size 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease, background-color 0.3s ease;
+  }
+
+  /* Hover states for chart bars columns */
+  .chart-bar-col {
+    cursor: pointer;
+  }
+  .chart-bar-col:hover .chart-bar:not(.anomaly):not(.forecast) {
+    background-color: var(--color-accent-secondary);
+  }
+
+  /* Vault list anims */
+  .vault-card {
+    transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.2s ease;
+  }
+  
+  .vault-filters {
+    margin-block-start: var(--spacing-md);
+  }
+
+  /* Highlight skills search query results */
+  .skills-category-card {
+    transition: border-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .skills-search-container {
+    margin-block-start: var(--spacing-md);
+    max-inline-size: 400px;
+  }
+  
+  .skills-list li {
+    transition: color 0.25s ease, opacity 0.25s ease, font-weight 0.25s ease;
+  }
+}
