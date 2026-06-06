@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
   <title>Sohan Sanil — Data Product Builder</title>
-  
+
   <!-- MANDATORY: Prevent Flash of Unstyled Content (FOUC) for dark mode -->
   <script>
     {
@@ -20,11 +21,14 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- Navigation -->
@@ -50,7 +54,7 @@
   </nav>
 
   <main class="content-wrapper">
-    
+
     <!-- Hero Section -->
     <header class="hero" id="hero-header">
       <div class="hero-bg-grid"></div>
@@ -63,11 +67,13 @@
           I build interactive products that <span class="gradient-text">turn data into decisions.</span>
         </h1>
         <p class="hero-subtitle">
-          Third-year Data Science & Engineering student bridging the gap between advanced analytics, artificial intelligence, and premium web engineering.
+          Third-year Data Science & Engineering student bridging the gap between advanced analytics, artificial
+          intelligence, and premium web engineering.
         </p>
         <div class="hero-actions">
           <a href="#projects" class="btn btn-primary" id="hero-view-work">Explore My Builds</a>
-          <a href="https://github.com/sohansanil/30-day-builder" class="btn btn-secondary" id="hero-github-link" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/sohansanil/30-day-builder" class="btn btn-secondary" id="hero-github-link"
+            target="_blank" rel="noopener noreferrer">
             GitHub Journey
           </a>
         </div>
@@ -81,7 +87,7 @@
           <h2 class="section-title">Current Journey Status</h2>
           <p class="section-subtitle">Real-time update on my 30-Day Builder Challenge.</p>
         </header>
-        
+
         <div class="journey-dashboard">
           <div class="dash-card">
             <div class="dash-label">Current Day</div>
@@ -119,7 +125,7 @@
 
         <div class="projects-container">
           <div class="projects-grid">
-            
+
             <!-- Project 1: IPL Match Simulator -->
             <article class="card" id="project-ipl-simulator">
               <div class="card-header">
@@ -128,11 +134,13 @@
               </div>
               <h3 class="card-title">IPL Match Simulator</h3>
               <p class="card-description">
-                An interactive simulator that runs Monte Carlo simulations of IPL cricket matches using historical player performance and pitch dynamics.
+                An interactive simulator that runs Monte Carlo simulations of IPL cricket matches using historical
+                player performance and pitch dynamics.
               </p>
-              
+
               <!-- Pure CSS Interactive Data Graphic -->
-              <div class="card-graphic flexbox-graphic" id="ipl-sim-graphic" aria-label="Win probability chart: Team A 58%, Team B 42%">
+              <div class="card-graphic flexbox-graphic" id="ipl-sim-graphic"
+                aria-label="Win probability chart: Team A 58%, Team B 42%">
                 <div class="sim-teams">
                   <span class="sim-team" id="sim-team-a-lbl">MI</span>
                   <span class="sim-team" id="sim-team-b-lbl">CSK</span>
@@ -143,7 +151,7 @@
                 </div>
                 <div class="sim-meta" id="sim-meta-text">10,000 matches simulated</div>
               </div>
-              
+
               <!-- Interactive Simulation Controls -->
               <div class="widget-controls">
                 <div class="control-row">
@@ -164,11 +172,13 @@
                 <button id="btn-sim-run" class="btn-widget">Simulate Match</button>
                 <div id="sim-result-outcome" class="sim-outcome-text"></div>
               </div>
-              
-                            <div class="card-metadata">
-                <div class="meta-row"><span class="meta-label">Problem:</span> Static stats don't capture match dynamics.</div>
+
+              <div class="card-metadata">
+                <div class="meta-row"><span class="meta-label">Problem:</span> Static stats don't capture match
+                  dynamics.</div>
                 <div class="meta-row"><span class="meta-label">User:</span> Cricket analysts & fans.</div>
-                <div class="meta-row"><span class="meta-label">Solution:</span> Monte Carlo simulator with real-time UI.</div>
+                <div class="meta-row"><span class="meta-label">Solution:</span> Monte Carlo simulator with real-time UI.
+                </div>
               </div>
               <details class="case-study-details">
                 <summary>View Case Study</summary>
@@ -196,11 +206,13 @@
               </div>
               <h3 class="card-title">Startup Funding Explorer</h3>
               <p class="card-description">
-                Load, filter, and run analytics queries on VC funding rounds. Allows users to save searches and bookmark high-growth companies.
+                Load, filter, and run analytics queries on VC funding rounds. Allows users to save searches and bookmark
+                high-growth companies.
               </p>
-              
+
               <!-- Pure CSS Interactive Data Graphic -->
-              <div class="card-graphic database-graphic" id="startup-graphic" aria-label="VC funding analytics: $42M total raised">
+              <div class="card-graphic database-graphic" id="startup-graphic"
+                aria-label="VC funding analytics: $42M total raised">
                 <div class="db-stats-grid">
                   <div class="db-stat-box">
                     <span class="db-stat-label">Total Raised</span>
@@ -222,7 +234,8 @@
               <!-- Interactive Explorer Controls -->
               <div class="widget-controls">
                 <div class="search-filter-row">
-                  <input type="text" id="startup-search" class="widget-input" placeholder="Filter company..." aria-label="Search startup">
+                  <input type="text" id="startup-search" class="widget-input" placeholder="Filter company..."
+                    aria-label="Search startup">
                   <div class="stage-filters" id="startup-stage-filters">
                     <button class="filter-pill active" data-stage="all">All</button>
                     <button class="filter-pill" data-stage="Seed">Seed</button>
@@ -230,7 +243,7 @@
                     <button class="filter-pill" data-stage="Series B">B</button>
                   </div>
                 </div>
-                
+
                 <div class="add-round-wrapper">
                   <button id="btn-toggle-add-form" class="btn-widget-secondary">+ Add Funding Round</button>
                   <form id="add-round-form" class="widget-form hidden">
@@ -240,7 +253,8 @@
                       <option value="Series A">Series A</option>
                       <option value="Series B">Series B</option>
                     </select>
-                    <input type="number" id="add-startup-amount" placeholder="Amount (in $M)" step="0.1" required class="widget-input">
+                    <input type="number" id="add-startup-amount" placeholder="Amount (in $M)" step="0.1" required
+                      class="widget-input">
                     <div class="form-actions">
                       <button type="submit" class="btn-widget-submit">Save</button>
                       <button type="button" id="btn-cancel-add-form" class="btn-widget-cancel">Cancel</button>
@@ -248,11 +262,13 @@
                   </form>
                 </div>
               </div>
-              
-                            <div class="card-metadata">
-                <div class="meta-row"><span class="meta-label">Problem:</span> VC funding data is fragmented and hard to query.</div>
+
+              <div class="card-metadata">
+                <div class="meta-row"><span class="meta-label">Problem:</span> VC funding data is fragmented and hard to
+                  query.</div>
                 <div class="meta-row"><span class="meta-label">User:</span> Founders & Investors.</div>
-                <div class="meta-row"><span class="meta-label">Solution:</span> Unified database explorer with dynamic filtering.</div>
+                <div class="meta-row"><span class="meta-label">Solution:</span> Unified database explorer with dynamic
+                  filtering.</div>
               </div>
               <details class="case-study-details">
                 <summary>View Case Study</summary>
@@ -280,13 +296,15 @@
               </div>
               <h3 class="card-title">ResumeAI Analyzer</h3>
               <p class="card-description">
-                AI-powered resume evaluation tool analyzing job description fit, keyword coverage, and ATS compatibility using NLP techniques.
+                AI-powered resume evaluation tool analyzing job description fit, keyword coverage, and ATS compatibility
+                using NLP techniques.
               </p>
-              
+
               <!-- Pure CSS Interactive Data Graphic -->
               <div class="card-graphic ai-graphic" id="resume-graphic" aria-label="Resume match score: 84%">
                 <div class="gauge-container">
-                  <div class="gauge-circle" id="resume-gauge" style="background: conic-gradient(var(--color-accent) 0% 84%, var(--ui-border) 84% 100%);">
+                  <div class="gauge-circle" id="resume-gauge"
+                    style="background: conic-gradient(var(--color-accent) 0% 84%, var(--ui-border) 84% 100%);">
                     <div class="gauge-inner">
                       <span class="gauge-score" id="gauge-score-val">84%</span>
                       <span class="gauge-label">Match</span>
@@ -309,15 +327,19 @@
                   </select>
                 </div>
                 <div class="textarea-container">
-                  <textarea id="resume-text-input" class="widget-textarea" placeholder="Paste resume text (e.g., specialized in Python, SQL, Pandas, and neural networks...)" aria-label="Resume Content"></textarea>
+                  <textarea id="resume-text-input" class="widget-textarea"
+                    placeholder="Paste resume text (e.g., specialized in Python, SQL, Pandas, and neural networks...)"
+                    aria-label="Resume Content"></textarea>
                 </div>
                 <button id="btn-analyze-resume" class="btn-widget">Analyze Fit</button>
               </div>
-              
-                            <div class="card-metadata">
-                <div class="meta-row"><span class="meta-label">Problem:</span> Job seekers don't know why they are rejected by ATS.</div>
+
+              <div class="card-metadata">
+                <div class="meta-row"><span class="meta-label">Problem:</span> Job seekers don't know why they are
+                  rejected by ATS.</div>
                 <div class="meta-row"><span class="meta-label">User:</span> Job seekers & students.</div>
-                <div class="meta-row"><span class="meta-label">Solution:</span> AI-powered resume parser and matcher.</div>
+                <div class="meta-row"><span class="meta-label">Solution:</span> AI-powered resume parser and matcher.
+                </div>
               </div>
               <details class="case-study-details">
                 <summary>View Case Study</summary>
@@ -345,9 +367,10 @@
               </div>
               <h3 class="card-title">Smart Expense Tracker</h3>
               <p class="card-description">
-                A college-student-focused tracker providing balance forecasting, spending anomaly detection, and AI categorization. Works offline as a PWA.
+                A college-student-focused tracker providing balance forecasting, spending anomaly detection, and AI
+                categorization. Works offline as a PWA.
               </p>
-              
+
               <!-- Pure CSS Interactive Data Graphic -->
               <div class="card-graphic line-graphic" id="expense-graphic" aria-label="Balance forecast: Normal">
                 <div class="chart-header">
@@ -389,7 +412,8 @@
                   </select>
                 </div>
                 <div class="expense-add-row">
-                  <input type="number" id="expense-add-amount" class="widget-input" placeholder="Amount ($)" min="1" aria-label="Expense Amount">
+                  <input type="number" id="expense-add-amount" class="widget-input" placeholder="Amount ($)" min="1"
+                    aria-label="Expense Amount">
                   <select id="expense-add-week" class="widget-select" aria-label="Select Week">
                     <option value="1">Week 1</option>
                     <option value="2">Week 2</option>
@@ -399,11 +423,13 @@
                   <button id="btn-add-expense" class="btn-widget-add">Add Spend</button>
                 </div>
               </div>
-              
-                            <div class="card-metadata">
-                <div class="meta-row"><span class="meta-label">Problem:</span> Students struggle to project end-of-month balances.</div>
+
+              <div class="card-metadata">
+                <div class="meta-row"><span class="meta-label">Problem:</span> Students struggle to project end-of-month
+                  balances.</div>
                 <div class="meta-row"><span class="meta-label">User:</span> College students.</div>
-                <div class="meta-row"><span class="meta-label">Solution:</span> Offline-first PWA with balance forecasting.</div>
+                <div class="meta-row"><span class="meta-label">Solution:</span> Offline-first PWA with balance
+                  forecasting.</div>
               </div>
               <details class="case-study-details">
                 <summary>View Case Study</summary>
@@ -438,12 +464,13 @@
           </p>
           <!-- Skills Search Bar -->
           <div class="skills-search-container">
-            <input type="text" id="skills-search" class="widget-input search-input" placeholder="Filter skills (e.g. Python, SQL, React)..." aria-label="Filter skills">
+            <input type="text" id="skills-search" class="widget-input search-input"
+              placeholder="Filter skills (e.g. Python, SQL, React)..." aria-label="Filter skills">
           </div>
         </header>
 
         <div class="skills-grid">
-          
+
           <!-- Category 1: Analytics & Data Science -->
           <div class="skills-category-card" id="skill-ds-analytics">
             <h3 class="skills-category-title">
@@ -514,7 +541,10 @@
             <div class="timeline-content">
               <span class="timeline-date">Day 2</span>
               <h3 class="timeline-title">Architecting the Portfolio</h3>
-              <p>Moved away from generic templates to build a custom CSS system using modern features like <code>@layer</code> and <code>oklch</code> colors. Realized the importance of a solid design foundation before touching JS.</p>
+              <p>Moved away from generic templates to build a custom CSS system using modern features like
+                <code>@layer</code> and <code>oklch</code> colors. Realized the importance of a solid design foundation
+                before touching JS.
+              </p>
             </div>
           </div>
           <div class="timeline-item">
@@ -522,7 +552,8 @@
             <div class="timeline-content">
               <span class="timeline-date">Day 1</span>
               <h3 class="timeline-title">The Commitment</h3>
-              <p>Decided to publicly commit to building data products. Set up the GitHub repository, defined the 30-day curriculum, and outlined the initial projects.</p>
+              <p>Decided to publicly commit to building data products. Set up the GitHub repository, defined the 30-day
+                curriculum, and outlined the initial projects.</p>
             </div>
           </div>
         </div>
@@ -543,7 +574,7 @@
             <button class="filter-pill" data-status="Reference">Reference</button>
           </div>
         </header>
-        
+
         <div class="vault-grid" id="vault-grid-container">
           <div class="vault-card" data-status="Reading">
             <span class="vault-icon">📚</span>
@@ -615,10 +646,14 @@
           <div class="about-text-content">
             <h2 class="about-title">About the 30-Day Journey</h2>
             <p class="about-p">
-              I am a 3rd-year Data Science and Engineering student preparing for placement season. In the tech landscape, the ability to generate insights is only half the battle — the other half is creating a delivery mechanism so people can actually use those insights.
+              I am a 3rd-year Data Science and Engineering student preparing for placement season. In the tech
+              landscape, the ability to generate insights is only half the battle — the other half is creating a
+              delivery mechanism so people can actually use those insights.
             </p>
             <p class="about-p">
-              This 30-Day Builder Journey is my commitment to shift from a student writing static notebooks to an engineer building products. I'm focusing on learnability, Git discipline, database schemas, full-stack connections, and incorporating AI to build and scale interactive web applications.
+              This 30-Day Builder Journey is my commitment to shift from a student writing static notebooks to an
+              engineer building products. I'm focusing on learnability, Git discipline, database schemas, full-stack
+              connections, and incorporating AI to build and scale interactive web applications.
             </p>
             <div class="journey-stats">
               <div class="journey-stat">
@@ -635,7 +670,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="about-visual-card">
             <div class="terminal-mock">
               <div class="terminal-header">
@@ -649,10 +684,11 @@
                 <p class="term-output">On branch main</p>
                 <p class="term-output">Your branch is up to date with 'origin/main'.</p>
                 <p class="term-output">Changes not staged for commit:</p>
-                <p class="term-output modified">  modified:   projects/portfolio/style.css</p>
+                <p class="term-output modified"> modified: projects/portfolio/style.css</p>
                 <p class="term-line"><span class="term-prompt">sohan@ds-engine:~$</span> node --version</p>
                 <p class="term-output">v24.16.0</p>
-                <p class="term-line"><span class="term-prompt">sohan@ds-engine:~$</span> python -c "import pandas as pd"</p>
+                <p class="term-line"><span class="term-prompt">sohan@ds-engine:~$</span> python -c "import pandas as pd"
+                </p>
                 <p class="term-output success">Pandas loaded. Ready to build.</p>
               </div>
             </div>
@@ -666,7 +702,8 @@
       <div class="section-container contact-container">
         <h2 class="contact-title">Let's Connect & Build</h2>
         <p class="contact-subtitle">
-          I am looking to connect with developers, data scientists, product managers, and recruiters during this Summer of Building.
+          I am looking to connect with developers, data scientists, product managers, and recruiters during this Summer
+          of Building.
         </p>
         <div class="contact-links">
           <a href="mailto:sanilsohan@gmail.com" class="contact-link-card" id="contact-email">
@@ -674,12 +711,14 @@
             <span class="contact-label">Email</span>
             <span class="contact-val">sanilsohan@gmail.com</span>
           </a>
-          <a href="https://linkedin.com/in/sohansanil" class="contact-link-card" id="contact-linkedin" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/sohan-sanil-77b8b8406/" class="contact-link-card" id="contact-linkedin"
+            target="_blank" rel="noopener noreferrer">
             <span class="contact-icon">💼</span>
             <span class="contact-label">LinkedIn</span>
             <span class="contact-val">sohansanil</span>
           </a>
-          <a href="https://github.com/sohansanil" class="contact-link-card" id="contact-github" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/sohansanil" class="contact-link-card" id="contact-github" target="_blank"
+            rel="noopener noreferrer">
             <span class="contact-icon">🐙</span>
             <span class="contact-label">GitHub</span>
             <span class="contact-val">sohansanil</span>
@@ -701,4 +740,5 @@
   <!-- Core script handles theme settings, dashboard, cards interactivity, and filtering -->
   <script src="script.js" defer></script>
 </body>
+
 </html>

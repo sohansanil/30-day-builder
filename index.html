@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Sohan Sanil — 30-Day Builder Journey Hub</title>
+  
+  <!-- Prevent FOUC for dark mode -->
+  <script>
+    {
+      const colorScheme = localStorage.getItem("color-scheme");
+      if (colorScheme) {
+        document.querySelector('meta[name="color-scheme"]').content = colorScheme;
+        document.documentElement.setAttribute('data-theme', colorScheme);
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Root Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-icon">&lt;/&gt;</span>
+        <span class="logo-text">30-Day Builder</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#dashboard" class="nav-item">Dashboard</a></li>
+        <li><a href="#timeline" class="nav-item">Journey Logs</a></li>
+        <li><a href="#connect" class="nav-item">Connect</a></li>
+      </ul>
+      <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle light/dark theme" title="Toggle theme">
+        <span class="toggle-icon sun-icon">☀️</span>
+        <span class="toggle-icon moon-icon">🌙</span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="content-wrapper">
+    
+    <!-- Hero Section -->
+    <header class="hero" id="dashboard">
+      <div class="hero-bg-grid"></div>
+      <div class="hero-container">
+        <div class="badge-container">
+          <span class="pulse-badge"></span>
+          <span class="badge-text">Phase 1: Foundations (Days 1–7)</span>
+        </div>
+        <h1 class="hero-title">
+          My 30-Day <span class="gradient-text">Builder Journey</span>
+        </h1>
+        <p class="hero-subtitle">
+          Documenting the transformation from a 3rd-year Data Science & Engineering student preparing for placements into a developer who designs, builds, and ships real software products in public.
+        </p>
+        
+        <!-- Progress dashboard metrics -->
+        <div class="journey-dashboard">
+          <div class="dash-card">
+            <div class="dash-label">Days Complete</div>
+            <div class="dash-value">3 / 30</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-label">Journey Progress</div>
+            <div class="dash-value highlight">10% Complete</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-label">Active Builds</div>
+            <div class="dash-value">1 (Portfolio Dashboard)</div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-label">Current Phase</div>
+            <div class="dash-value phase-text">Foundations & Deployment</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 30-Day Grid Section -->
+    <section class="section" id="timeline">
+      <div class="section-container">
+        <header class="section-header">
+          <h2 class="section-title">The 30-Day Roadmap</h2>
+          <p class="section-subtitle">Follow along day-by-day. Check out learning logs and live interactive projects.</p>
+        </header>
+
+        <div class="grid-container">
+          <div class="days-grid">
+            
+            <!-- Day 1 -->
+            <article class="day-card completed">
+              <div class="day-card-header">
+                <span class="day-num">Day 1</span>
+                <span class="status-badge completed">Completed</span>
+              </div>
+              <h3 class="day-title">Toolkit & Setup</h3>
+              <p class="day-desc">Set up Git branching, created the project outline, initialized the GitHub repository, and documented goals.</p>
+              <div class="day-meta">
+                <span class="meta-tag">Git</span>
+                <span class="meta-tag">Markdown</span>
+              </div>
+              <div class="day-actions">
+                <a href="days/day-01.md" class="btn btn-secondary">Read Log</a>
+              </div>
+            </article>
+
+            <!-- Day 2 -->
+            <article class="day-card completed">
+              <div class="day-card-header">
+                <span class="day-num">Day 2</span>
+                <span class="status-badge completed">Completed</span>
+              </div>
+              <h3 class="day-title">HTML & Modern CSS</h3>
+              <p class="day-desc">Designed a premium portfolio using semantic markup, CSS Subgrid, Container Queries, and light-dark variables.</p>
+              <div class="day-meta">
+                <span class="meta-tag">Grid / Subgrid</span>
+                <span class="meta-tag">OKLCH</span>
+              </div>
+              <div class="day-actions">
+                <a href="days/day-02.md" class="btn btn-secondary">Read Log</a>
+                <a href="projects/portfolio/index.html" class="btn btn-primary">Open Project</a>
+              </div>
+            </article>
+
+            <!-- Day 3 -->
+            <article class="day-card completed">
+              <div class="day-card-header">
+                <span class="day-num">Day 3</span>
+                <span class="status-badge completed">Completed</span>
+              </div>
+              <h3 class="day-title">JS & Interactivity</h3>
+              <p class="day-desc">Wrote native JS engines: IPL simulator, Startup Explorer filters, ResumeAI text keywords, and Expense anomaly bars.</p>
+              <div class="day-meta">
+                <span class="meta-tag">DOM Interactivity</span>
+                <span class="meta-tag">Animations</span>
+              </div>
+              <div class="day-actions">
+                <a href="days/day-03.md" class="btn btn-secondary">Read Log</a>
+                <a href="projects/portfolio/index.html" class="btn btn-primary">Open Project</a>
+              </div>
+            </article>
+
+            <!-- Day 4 -->
+            <article class="day-card active">
+              <div class="day-card-header">
+                <span class="day-num">Day 4</span>
+                <span class="status-badge active">Active</span>
+              </div>
+              <h3 class="day-title">Deploy to the Internet</h3>
+              <p class="day-desc">Creating a central index directory hub and setting up automated CI/CD pipeline via GitHub Actions to deploy to GitHub Pages.</p>
+              <div class="day-meta">
+                <span class="meta-tag">CI/CD</span>
+                <span class="meta-tag">GitHub Pages</span>
+              </div>
+              <div class="day-actions">
+                <span class="active-indicator">Deploying Live...</span>
+              </div>
+            </article>
+
+            <!-- Day 5 -->
+            <article class="day-card planned">
+              <div class="day-card-header">
+                <span class="day-num">Day 5</span>
+                <span class="status-badge planned">Planned</span>
+              </div>
+              <h3 class="day-title">APIs: How Apps Talk</h3>
+              <p class="day-desc">Learning details of fetch calls, response parsing, error handling, and API communication protocols.</p>
+              <div class="day-meta">
+                <span class="meta-tag">APIs</span>
+                <span class="meta-tag">JSON</span>
+              </div>
+            </article>
+
+            <!-- Day 6 -->
+            <article class="day-card planned">
+              <div class="day-card-header">
+                <span class="day-num">Day 6</span>
+                <span class="status-badge planned">Planned</span>
+              </div>
+              <h3 class="day-title">Git Deep Dive</h3>
+              <p class="day-desc">Mastering advanced Git: interactive rebasing, cherry-picking, reflog recovery, and resolving conflicts.</p>
+              <div class="day-meta">
+                <span class="meta-tag">Rebase</span>
+                <span class="meta-tag">Conflict Resolving</span>
+              </div>
+            </article>
+
+            <!-- Day 7 -->
+            <article class="day-card planned">
+              <div class="day-card-header">
+                <span class="day-num">Day 7</span>
+                <span class="status-badge planned">Planned</span>
+              </div>
+              <h3 class="day-title">Phase 1 Retrospective</h3>
+              <p class="day-desc">Reflecting on Phase 1 foundations, resolving bugs, improving page performance, and planning Phase 2.</p>
+              <div class="day-meta">
+                <span class="meta-tag">Retrospective</span>
+                <span class="meta-tag">Web Core Vitals</span>
+              </div>
+            </article>
+
+            <!-- Day 8 -->
+            <article class="day-card planned">
+              <div class="day-card-header">
+                <span class="day-num">Day 8</span>
+                <span class="status-badge planned">Planned</span>
+              </div>
+              <h3 class="day-title">React & Components</h3>
+              <p class="day-desc">Beginning Phase 2: React component structures, props, states, and migrating pages to Vite React.</p>
+              <div class="day-meta">
+                <span class="meta-tag">React</span>
+                <span class="meta-tag">Vite</span>
+              </div>
+            </article>
+
+            <!-- Day 9-10 -->
+            <article class="day-card planned">
+              <div class="day-card-header">
+                <span class="day-num">Days 9–10</span>
+                <span class="status-badge planned">Planned</span>
+              </div>
+              <h3 class="day-title">IPL Match Simulator MVP</h3>
+              <p class="day-desc">Building an interactive React simulation dashboard displaying Monte Carlo cricket results and charts.</p>
+              <div class="day-meta">
+                <span class="meta-tag">React State</span>
+                <span class="meta-tag">Recharts</span>
+              </div>
+            </article>
+
+            <!-- Days 11-15+ (Summary of Future Stages) -->
+            <article class="day-card planned summary-card">
+              <div class="day-card-header">
+                <span class="day-num">Future Roadmap</span>
+                <span class="status-badge planned">Planned</span>
+              </div>
+              <h3 class="day-title">Data & AI Products</h3>
+              <p class="day-desc">Upcoming milestones include FastAPI backends, Supabase models, Gemini API parsing, anomalies, PWAs, RAG pipelines, and a capstone product.</p>
+              <div class="day-meta">
+                <span class="meta-tag">FastAPI</span>
+                <span class="meta-tag">Supabase</span>
+                <span class="meta-tag">Gemini API</span>
+                <span class="meta-tag">RAG</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Connect Section -->
+    <section class="section section-alt" id="connect">
+      <div class="section-container connect-container">
+        <h2 class="connect-title">Follow the Progress</h2>
+        <p class="connect-subtitle">I'm documenting my learning journey in public. Let's connect and build together.</p>
+        <div class="connect-links">
+          <a href="https://linkedin.com/in/sohansanil" class="connect-card" target="_blank" rel="noopener noreferrer">
+            <span class="connect-icon">💼</span>
+            <span class="connect-label">LinkedIn</span>
+            <span class="connect-val">sohansanil</span>
+          </a>
+          <a href="https://github.com/sohansanil" class="connect-card" target="_blank" rel="noopener noreferrer">
+            <span class="connect-icon">🐙</span>
+            <span class="connect-label">GitHub</span>
+            <span class="connect-val">sohansanil</span>
+          </a>
+          <a href="mailto:sanilsohan@gmail.com" class="connect-card">
+            <span class="connect-icon">📧</span>
+            <span class="connect-label">Email</span>
+            <span class="connect-val">sanilsohan@gmail.com</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p class="footer-text">&copy; 2026 Sohan Sanil. All rights reserved.</p>
+      <p class="footer-tagline">Building in public — 30-Day software development transformation journey.</p>
+    </div>
+  </footer>
+
+  <!-- Basic Script for Theme Toggle -->
+  <script>
+    const themeToggleBtn = document.getElementById("theme-toggle-btn");
+    const metaColorScheme = document.querySelector('meta[name="color-scheme"]');
+    
+    // Theme toggle handler
+    themeToggleBtn.addEventListener("click", () => {
+      const currentScheme = metaColorScheme.content;
+      let newScheme = "dark";
+      
+      if (currentScheme === "dark" || (currentScheme === "light dark" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        newScheme = "light";
+      } else {
+        newScheme = "dark";
+      }
+      
+      metaColorScheme.content = newScheme;
+      document.documentElement.setAttribute('data-theme', newScheme);
+      localStorage.setItem("color-scheme", newScheme);
+    });
+  </script>
+</body>
+</html>
