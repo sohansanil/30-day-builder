@@ -1,0 +1,53 @@
+# ========================================
+# 30-Day Builder Journey — .gitignore
+# ========================================
+# This file tells Git which files/folders to IGNORE.
+# Ignored files won't be tracked, committed, or pushed to GitHub.
+# This is critical for:
+#   1. Security — never upload API keys or secrets
+#   2. Cleanliness — don't upload generated/temporary files
+#   3. Size — node_modules/ can be 500MB+
+
+# ---------- Dependencies ----------
+# When you install packages with npm, they go into node_modules/
+# This folder can contain 50,000+ files. Never commit it.
+# Other developers will run `npm install` to recreate it from package.json.
+node_modules/
+
+# ---------- Environment Variables ----------
+# .env files contain secrets like API keys and database passwords.
+# NEVER commit these. This is how data breaches happen.
+.env
+.env.local
+.env.production
+.env.*.local
+
+# ---------- Build Output ----------
+# These are generated when you build your app for production.
+# They can always be recreated from source code.
+dist/
+build/
+.next/
+out/
+
+# ---------- OS Files ----------
+# macOS creates .DS_Store in every folder. It's useless clutter.
+.DS_Store
+Thumbs.db
+
+# ---------- IDE Settings ----------
+# Your editor's configuration. Other developers use different editors.
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---------- Python (for FastAPI later) ----------
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ---------- Logs & Temporary Files ----------
+*.log
+npm-debug.log*
