@@ -112,6 +112,85 @@
                     <div class="spinner"></div>
                     <p>Loading air quality data...</p>
                 </div>
+        </section>
+
+        <!-- Human Insights Section -->
+        <section class="section" id="human-insights-section">
+            <div class="section-header">
+                <h2 class="section-title">Human Decisions & Lifestyle Insights</h2>
+                <p class="section-subtitle">Translating real-time atmospheric measurements into daily life choices</p>
+            </div>
+            
+            <div class="human-insights-layout">
+                <!-- Why AeroIntel Exists Panel -->
+                <div class="narrative-card card">
+                    <div class="narrative-badge">PROJECT PHILOSOPHY</div>
+                    <h3>Why AeroIntel Exists</h3>
+                    <p class="narrative-text">
+                        I built AeroIntel to explore how environmental data can be transformed into decisions people actually make every day. Instead of just showing raw chemical indices, AeroIntel combines statistics, regression forecasting, and database engineering to answer a simpler question:
+                    </p>
+                    <p class="narrative-quote">"What does today's air quality mean for me?"</p>
+                </div>
+
+                <!-- Today's Recommendation Details -->
+                <div class="recommendation-card card">
+                    <div class="card-header">
+                        <h3>🌅 Today's Recommendation</h3>
+                        <span class="recommendation-badge" id="rec-city-badge">Selected City</span>
+                    </div>
+                    <div class="rec-main-box">
+                        <div class="rec-headline" id="rec-headline">Loading recommendation...</div>
+                        <p class="rec-description" id="rec-description">Our models are evaluating the current pollutant levels and forecast trend...</p>
+                    </div>
+                    
+                    <div class="lifestyle-grid">
+                        <div class="lifestyle-item" id="life-run">
+                            <span class="lifestyle-icon">🏃‍♂️</span>
+                            <div>
+                                <div class="lifestyle-label">Running & Outdoor Workouts</div>
+                                <div class="lifestyle-status">Loading...</div>
+                            </div>
+                        </div>
+                        <div class="lifestyle-item" id="life-cycle">
+                            <span class="lifestyle-icon">🚲</span>
+                            <div>
+                                <div class="lifestyle-label">Cycling & Commuting</div>
+                                <div class="lifestyle-status">Loading...</div>
+                            </div>
+                        </div>
+                        <div class="lifestyle-item" id="life-play">
+                            <span class="lifestyle-icon">👶</span>
+                            <div>
+                                <div class="lifestyle-label">Children's Play & Outdoor Rest</div>
+                                <div class="lifestyle-status">Loading...</div>
+                            </div>
+                        </div>
+                        <div class="lifestyle-item" id="life-vent">
+                            <span class="lifestyle-icon">🪟</span>
+                            <div>
+                                <div class="lifestyle-label">Window Ventilation</div>
+                                <div class="lifestyle-status">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaderboard & Observations -->
+                <div class="leaderboard-card card">
+                    <div class="card-header">
+                        <h3>Today's Air Quality Leaderboard</h3>
+                        <span class="leaderboard-unit">AQI US</span>
+                    </div>
+                    <div class="leaderboard-list" id="leaderboard-list">
+                        <!-- Populated dynamically by app.js -->
+                    </div>
+                    <div class="observations-box">
+                        <h4>🔍 Key System Observations</h4>
+                        <ul class="observations-list" id="observations-list">
+                            <!-- Populated dynamically by app.js -->
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -138,7 +217,28 @@
                                 <option value="sulphur_dioxide">SO₂</option>
                                 <option value="carbon_monoxide">CO</option>
                             </select>
+                            <button id="export-chart-csv" class="btn btn-icon btn-sm" title="Export chart data to CSV">
+                                📥 CSV
+                            </button>
                         </div>
+                    </div>
+                    <div class="chart-options-strip">
+                        <label class="toggle-control">
+                            <input type="checkbox" id="toggle-sma5" checked>
+                            <span class="toggle-label">SMA-5h</span>
+                        </label>
+                        <label class="toggle-control">
+                            <input type="checkbox" id="toggle-sma20">
+                            <span class="toggle-label">SMA-20h</span>
+                        </label>
+                        <label class="toggle-control">
+                            <input type="checkbox" id="toggle-anomalies" checked>
+                            <span class="toggle-label">Anomalies</span>
+                        </label>
+                        <label class="toggle-control">
+                            <input type="checkbox" id="toggle-forecast" checked>
+                            <span class="toggle-label">6h Forecast</span>
+                        </label>
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="timeseries-chart" role="img" aria-label="Time series chart of pollutant concentrations"></canvas>
@@ -154,6 +254,87 @@
                     <p class="breakdown-subtitle" id="breakdown-city">Select a city to view breakdown</p>
                     <div class="pollutant-bars" id="pollutant-bars">
                         <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Analytics Section -->
+        <section class="section" id="advanced-analytics-section">
+            <div class="section-header">
+                <h2 class="section-title">Advanced Environmental Intelligence</h2>
+                <p class="section-subtitle">Statistical modeling, anomaly detection, and pollutant correlations</p>
+            </div>
+            <div class="analytics-layout">
+                <!-- Correlation Heatmap Panel -->
+                <div class="heatmap-panel card">
+                    <div class="card-header">
+                        <h3>Pollutant Correlation Matrix</h3>
+                        <span class="info-tooltip" title="Pearson correlation coefficient (r) between pollutants over selected city's history. Values range from -1.0 (opposite) to +1.0 (moving together).">ℹ</span>
+                    </div>
+                    <p class="breakdown-subtitle" id="heatmap-city">Select a city to view correlations</p>
+                    <div class="heatmap-container-wrapper">
+                        <div class="heatmap-labels-y" id="heatmap-labels-y"></div>
+                        <div class="heatmap-grid-wrapper">
+                            <div class="heatmap-grid" id="heatmap-grid"></div>
+                            <div class="heatmap-labels-x" id="heatmap-labels-x"></div>
+                        </div>
+                    </div>
+                    <div class="heatmap-legend">
+                        <span class="legend-grad-label">-1.0 (Inverse)</span>
+                        <div class="legend-gradient"></div>
+                        <span class="legend-grad-label">+1.0 (Direct)</span>
+                    </div>
+                </div>
+
+                <!-- AI Analyst & Intelligence Cards -->
+                <div class="analyst-panel">
+                    <div class="ai-insight-box card">
+                        <div class="card-header">
+                            <h3>AeroIntel Analyst Insights</h3>
+                            <span class="ai-badge">AI Agent</span>
+                        </div>
+                        <div class="insight-text" id="ai-insight-text">
+                            <p class="sql-placeholder">Select a city to generate automated data insights...</p>
+                        </div>
+                    </div>
+                    <div class="intelligence-cards">
+                        <!-- Card 1: Trend Forecast -->
+                        <div class="intel-card card">
+                            <div class="intel-card-header">
+                                <span class="intel-card-icon">📈</span>
+                                <span class="intel-card-title">Trend Forecast</span>
+                            </div>
+                            <div class="intel-card-value" id="intel-trend-val">—</div>
+                            <div class="intel-card-desc" id="intel-trend-desc">6-hour trajectory projection</div>
+                        </div>
+                        <!-- Card 2: Atmospheric Volatility -->
+                        <div class="intel-card card">
+                            <div class="intel-card-header">
+                                <span class="intel-card-icon">⚡</span>
+                                <span class="intel-card-title">Atmospheric Stability</span>
+                            </div>
+                            <div class="intel-card-value" id="intel-vol-val">—</div>
+                            <div class="intel-card-desc" id="intel-vol-desc">Rolling volatility index</div>
+                        </div>
+                        <!-- Card 3: Anomaly Report -->
+                        <div class="intel-card card">
+                            <div class="intel-card-header">
+                                <span class="intel-card-icon">🚨</span>
+                                <span class="intel-card-title">Anomaly Alerts</span>
+                            </div>
+                            <div class="intel-card-value" id="intel-anomaly-val">—</div>
+                            <div class="intel-card-desc" id="intel-anomaly-desc">Statistical outliers in 24h</div>
+                        </div>
+                        <!-- Card 4: Dominant Driver -->
+                        <div class="intel-card card">
+                            <div class="intel-card-header">
+                                <span class="intel-card-icon">🔬</span>
+                                <span class="intel-card-title">Dominant Driver</span>
+                            </div>
+                            <div class="intel-card-value" id="intel-driver-val">—</div>
+                            <div class="intel-card-desc" id="intel-driver-desc">Main pollutant driving index</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -176,7 +357,10 @@
                         spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
                     <div class="sql-actions">
                         <span class="sql-hint">⌘ + Enter to run</span>
-                        <button id="sql-run" class="btn btn-primary btn-sm">▶ Run Query</button>
+                        <div class="sql-btn-group">
+                            <button id="sql-export" class="btn btn-ghost btn-sm" style="margin-right: 8px;">📥 Export CSV</button>
+                            <button id="sql-run" class="btn btn-primary btn-sm">▶ Run Query</button>
+                        </div>
                     </div>
                 </div>
                 <div class="sql-output">

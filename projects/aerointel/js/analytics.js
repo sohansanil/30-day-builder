@@ -224,6 +224,286 @@ function getPollutantKeys() {
     return Object.keys(WHO_THRESHOLDS);
 }
 
+function calculateSMA(values, period) {
+    const sma = [];
+    for (let i = 0; i < values.length; i++) {
+        if (i < period - 1) {
+            sma.push(null);
+            continue;
+        }
+        let sum = 0;
+        let validCount = 0;
+        for (let j = 0; j < period; j++) {
+            const val = values[i - j];
+            if (val != null) {
+                sum += val;
+                validCount++;
+            }
+        }
+        sma.push(validCount === period ? sum / period : null);
+    }
+    return sma;
+}
+
+function calculateVolatility(values, period) {
+    const vol = [];
+    for (let i = 0; i < values.length; i++) {
+        if (i < period - 1) {
+            vol.push(null);
+            continue;
+        }
+        // Calculate mean of window
+        let sum = 0;
+        let validCount = 0;
+        const windowValues = [];
+        for (let j = 0; j < period; j++) {
+            const val = values[i - j];
+            if (val != null) {
+                sum += val;
+                validCount++;
+                windowValues.push(val);
+            }
+        }
+        
+        if (validCount < period) {
+            vol.push(null);
+            continue;
+        }
+        
+        const mean = sum / period;
+
+        // Calculate variance
+        let sumSqDiff = 0;
+        for (const val of windowValues) {
+            sumSqDiff += Math.pow(val - mean, 2);
+        }
+        // Bessel's correction: divide by (N-1) instead of N
+        const variance = period > 1 ? sumSqDiff / (period - 1) : 0;
+        vol.push(Math.sqrt(variance));
+    }
+    return vol;
+}
+
+function detectAnomalies(values, period = 24, zThreshold = 2.0) {
+    const anomalies = [];
+    const vol = calculateVolatility(values, period);
+    
+    // Calculate rolling mean for Z-score calculation
+    const rollingMeans = [];
+    for (let i = 0; i < values.length; i++) {
+        if (i < period - 1) {
+            rollingMeans.push(null);
+            continue;
+        }
+        let sum = 0;
+        let validCount = 0;
+        for (let j = 0; j < period; j++) {
+            const val = values[i - j];
+            if (val != null) {
+                sum += val;
+                validCount++;
+            }
+        }
+        rollingMeans.push(validCount === period ? sum / period : null);
+    }
+
+    for (let i = 0; i < values.length; i++) {
+        const val = values[i];
+        const mean = rollingMeans[i];
+        const stdDev = vol[i];
+
+        if (val == null || mean == null || stdDev == null || stdDev < 0.01) {
+            anomalies.push(null);
+            continue;
+        }
+
+        const zScore = (val - mean) / stdDev;
+        const absZ = Math.abs(zScore);
+
+        if (absZ >= zThreshold) {
+            anomalies.push({
+                index: i,
+                value: val,
+                zScore: zScore,
+                severity: absZ > 3.0 ? 'severe' : 'moderate'
+            });
+        } else {
+            anomalies.push(null);
+        }
+    }
+    return anomalies;
+}
+
+function calculateLinearRegression(values, times, forecastPeriods = 6) {
+    // Filter out nulls for model training, but keep track of indices
+    const validData = [];
+    for (let i = 0; i < values.length; i++) {
+        if (values[i] != null) {
+            validData.push({ x: i, y: values[i] });
+        }
+    }
+
+    if (validData.length < 2) {
+        return {
+            slope: 0,
+            intercept: 0,
+            forecastTimes: [],
+            forecastValues: []
+        };
+    }
+
+    const n = validData.length;
+    let sumX = 0;
+    let sumY = 0;
+    let sumXY = 0;
+    let sumXX = 0;
+
+    for (const pt of validData) {
+        sumX += pt.x;
+        sumY += pt.y;
+        sumXY += pt.x * pt.y;
+        sumXX += pt.x * pt.x;
+    }
+
+    // OLS formulas
+    const denominator = n * sumXX - sumX * sumX;
+    const slope = denominator !== 0 ? (n * sumXY - sumX * sumY) / denominator : 0;
+    const intercept = (sumY - slope * sumX) / n;
+
+    // Generate forecast projections
+    const lastIndex = values.length - 1;
+    const forecastValues = [];
+    const forecastTimes = [];
+    
+    // We want the forecast array to align with the historical timeline,
+    // so we pad the start with nulls up to the latest historical point.
+    const paddedForecast = Array(values.length).fill(null);
+    
+    // The link point between raw and forecast is the last historical point
+    if (values.length > 0) {
+        paddedForecast[values.length - 1] = values[values.length - 1];
+    }
+
+    let lastTime = times.length > 0 ? new Date(times[times.length - 1]) : new Date();
+
+    for (let k = 1; k <= forecastPeriods; k++) {
+        const xFuture = lastIndex + k;
+        const yPred = slope * xFuture + intercept;
+        
+        // Project time
+        const futureTime = new Date(lastTime.getTime() + k * 60 * 60 * 1000);
+        
+        forecastTimes.push(futureTime.toISOString());
+        paddedForecast.push(yPred);
+    }
+
+    return {
+        slope,
+        intercept,
+        forecastTimes,
+        forecastValues: paddedForecast
+    };
+}
+
+function calculatePearsonCorrelation(seriesA, seriesB) {
+    if (seriesA.length !== seriesB.length || seriesA.length < 2) {
+        return 0;
+    }
+
+    // Filter out pairs containing nulls
+    const validA = [];
+    const validB = [];
+    for (let i = 0; i < seriesA.length; i++) {
+        if (seriesA[i] != null && seriesB[i] != null) {
+            validA.push(seriesA[i]);
+            validB.push(seriesB[i]);
+        }
+    }
+
+    const n = validA.length;
+    if (n < 2) return 0;
+
+    // Calculate means
+    let sumA = 0;
+    let sumB = 0;
+    for (let i = 0; i < n; i++) {
+        sumA += validA[i];
+        sumB += validB[i];
+    }
+    const meanA = sumA / n;
+    const meanB = sumB / n;
+
+    // Calculate covariance and standard deviations
+    let sumProductDiff = 0;
+    let sumSqDiffA = 0;
+    let sumSqDiffB = 0;
+
+    for (let i = 0; i < n; i++) {
+        const diffA = validA[i] - meanA;
+        const diffB = validB[i] - meanB;
+        sumProductDiff += diffA * diffB;
+        sumSqDiffA += diffA * diffA;
+        sumSqDiffB += diffB * diffB;
+    }
+
+    if (sumSqDiffA === 0 || sumSqDiffB === 0) return 0;
+
+    return sumProductDiff / Math.sqrt(sumSqDiffA * sumSqDiffB);
+}
+
+function generateNaturalLanguageInsights(city, latestReading, slope, latestVol, anomalyCount, selectedPollutant) {
+    if (!latestReading) return "No active telemetry data available for this location.";
+
+    const name = WHO_THRESHOLDS[selectedPollutant]?.name || selectedPollutant;
+    const value = latestReading[selectedPollutant];
+    const threshold = WHO_THRESHOLDS[selectedPollutant]?.limit || 15;
+    const ratio = value / threshold;
+    const unit = WHO_THRESHOLDS[selectedPollutant]?.unit || '';
+
+    let levelAdvice = '';
+    if (ratio <= 0.5) levelAdvice = `which is well within the safe WHO guideline of ${threshold} ${unit} (currently at **${ratio.toFixed(1)}x** the threshold).`;
+    else if (ratio <= 1.0) levelAdvice = `which is approaching the WHO safety threshold of ${threshold} ${unit} (currently at **${ratio.toFixed(1)}x**). Exposure is safe but trends should be monitored.`;
+    else if (ratio <= 2.0) levelAdvice = `which exceeds the WHO guideline by **${ratio.toFixed(1)}x**. Sensitive individuals may experience respiratory discomfort.`;
+    else levelAdvice = `which is at a hazardous level of **${ratio.toFixed(1)}x** the WHO safety guideline. Healthy individuals should limit outdoor activities.`;
+
+    let trendAdvice = '';
+    if (slope > 0.05) trendAdvice = `A linear regression model projects a **rising trend (+${slope.toFixed(2)} ${unit}/hr)** over the next 6 hours, indicating deteriorating conditions.`;
+    else if (slope < -0.05) trendAdvice = `The predictive trend line is **falling (${slope.toFixed(2)} ${unit}/hr)**, indicating expected clearance and improving air quality.`;
+    else trendAdvice = `The forecasting model indicates a **flat trajectory**, suggesting stable air concentrations over the next 6 hours.`;
+
+    let volAdvice = '';
+    if (latestVol == null) {
+        volAdvice = ``;
+    } else {
+        const volRatio = latestVol / threshold;
+        if (volRatio <= 0.15) {
+            volAdvice = `Atmospheric dispersion dynamics are **Stable**, meaning sudden pollution swings are highly unlikely.`;
+        } else if (volRatio <= 0.35) {
+            volAdvice = `Dispersion patterns show **Moderate instability**, likely driven by localized traffic cycles or changing winds.`;
+        } else {
+            volAdvice = `Atmospheric conditions are **Highly Turbulent**. Pollutant levels are fluctuating rapidly; caution is advised as conditions can change quickly.`;
+        }
+    }
+
+    let anomalyAdvice = '';
+    if (anomalyCount === 0) {
+        anomalyAdvice = `No statistical anomalies have been detected in the last 24 hours, suggesting normal daily cycling.`;
+    } else {
+        anomalyAdvice = `AeroIntel flagged **${anomalyCount} statistical anomaly alert${anomalyCount > 1 ? 's' : ''}** in the last 24 hours, indicating unusual local emissions or extreme wind shifts.`;
+    }
+
+    return `
+<strong>AeroIntel Analyst Diagnostic Report for ${city}:</strong>
+Currently analyzing <strong>${name}</strong> concentrations (latest: **${value?.toFixed(1)} ${unit}**), ${levelAdvice}
+
+${trendAdvice} ${volAdvice}
+
+${anomalyAdvice}
+
+<em>Tip: Click any cell in the Pollutant Correlation Matrix below to investigate chemical emissions relationships.</em>
+    `.trim();
+}
+
 export {
     AQI_LEVELS,
     classifyAQI,
@@ -231,4 +511,10 @@ export {
     getPollutantStatus,
     getPollutantBarColor,
     getPollutantKeys,
+    calculateSMA,
+    calculateVolatility,
+    detectAnomalies,
+    calculateLinearRegression,
+    calculatePearsonCorrelation,
+    generateNaturalLanguageInsights,
 };

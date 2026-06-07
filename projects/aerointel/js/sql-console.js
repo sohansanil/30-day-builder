@@ -124,12 +124,15 @@ function initSQLConsole(db) {
         input.focus();
     });
 
+    let lastResult = null;
+
     // ---- Run Query ----
     function runQuery() {
         const sql = input.value.trim();
         if (!sql) return;
 
         const result = db.query(sql);
+        lastResult = result;
 
         if (result.error) {
             resultsDiv.innerHTML = `<div class="sql-error">❌ ${escapeHtml(result.error)}</div>`;
@@ -165,6 +168,35 @@ function initSQLConsole(db) {
 
     // Run button click
     runBtn.addEventListener('click', runQuery);
+
+    // Export button click
+    document.getElementById('sql-export')?.addEventListener('click', () => {
+        if (!lastResult || lastResult.error || !lastResult.rows || lastResult.rows.length === 0) {
+            alert("No query results to export. Run a successful query first.");
+            return;
+        }
+        
+        const csvRows = [lastResult.columns.join(",")];
+        for (const row of lastResult.rows) {
+            const rowStr = row.map(val => {
+                if (val == null) return "";
+                const str = String(val);
+                if (str.includes(",") || str.includes("\n") || str.includes('"')) {
+                    return `"${str.replace(/"/g, '""')}"`;
+                }
+                return str;
+            }).join(",");
+            csvRows.push(rowStr);
+        }
+        
+        const blob = new Blob([csvRows.join("\n")], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute("download", `aerointel_query_results.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
 
     // Keyboard shortcut: Cmd+Enter (Mac) or Ctrl+Enter (Windows/Linux)
     input.addEventListener('keydown', (e) => {
