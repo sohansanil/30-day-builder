@@ -35,6 +35,17 @@ class TimeSeriesChart {
         this.lineColor = '';
         this.thresholdValue = null;
         this.thresholdLabel = '';
+        this.sma5Values = null;
+        this.sma20Values = null;
+        this.anomalies = null;
+        this.forecastTimes = null;
+        this.forecastValues = null;
+
+        // Display toggles
+        this.showSma5 = true;
+        this.showSma20 = false;
+        this.showAnomalies = true;
+        this.showForecast = true;
 
         // Tooltip state
         this._hoverIndex = -1;
@@ -50,42 +61,37 @@ class TimeSeriesChart {
         this._resizeObserver.observe(canvas.parentElement);
     }
 
-    /**
-     * Set chart data and trigger a render.
-     * 
-     * @param {object} options
-     * @param {string[]} options.timeLabels - Array of ISO time strings
-     * @param {number[]} options.values - Array of data values
-     * @param {string} options.label - Dataset label (e.g., "PM2.5")
-     * @param {string} options.lineColor - CSS color for the data line
-     * @param {number|null} options.thresholdValue - Optional horizontal threshold line
-     * @param {string} options.thresholdLabel - Label for the threshold
-     */
-    setData({ timeLabels, values, label, lineColor, thresholdValue = null, thresholdLabel = '' }) {
+    setData({
+        timeLabels,
+        values,
+        label,
+        lineColor,
+        thresholdValue = null,
+        thresholdLabel = '',
+        sma5Values = null,
+        sma20Values = null,
+        anomalies = null,
+        forecastTimes = null,
+        forecastValues = null
+    }) {
         this.timeLabels = timeLabels;
         this.values = values;
         this.label = label;
         this.lineColor = lineColor;
         this.thresholdValue = thresholdValue;
         this.thresholdLabel = thresholdLabel;
+        this.sma5Values = sma5Values;
+        this.sma20Values = sma20Values;
+        this.anomalies = anomalies;
+        this.forecastTimes = forecastTimes;
+        this.forecastValues = forecastValues;
         this._hoverIndex = -1;
         this.render();
     }
 
-    /**
-     * Main render method — called whenever data changes or canvas resizes.
-     * 
-     * Canvas rendering follows this pattern:
-     * 1. Size the canvas (handle high-DPI screens)
-     * 2. Clear everything
-     * 3. Calculate scales (data range → pixel range)
-     * 4. Draw layers bottom-to-top: grid → threshold → data → axes → tooltip
-     */
     render() {
         const { canvas, ctx, padding } = this;
 
-        // High-DPI support: devicePixelRatio handles Retina displays.
-        // Without this, Canvas looks blurry on high-DPI screens.
         const dpr = window.devicePixelRatio || 1;
         const rect = canvas.parentElement.getBoundingClientRect();
         const width = rect.width;
@@ -97,14 +103,11 @@ class TimeSeriesChart {
         canvas.style.height = height + 'px';
         ctx.scale(dpr, dpr);
 
-        // Chart drawing area (inside padding)
         const chartW = width - padding.left - padding.right;
         const chartH = height - padding.top - padding.bottom;
 
-        // Clear canvas
         ctx.clearRect(0, 0, width, height);
 
-        // If no data, show placeholder
         if (!this.values.length) {
             ctx.fillStyle = this._getColor('--text-muted');
             ctx.font = '14px Inter, sans-serif';
@@ -113,23 +116,28 @@ class TimeSeriesChart {
             return;
         }
 
-        // Filter out null values for range calculation
-        const validValues = this.values.filter(v => v != null);
+        let validValues = this.values.filter(v => v != null);
+        if (this.showSma5 && this.sma5Values) {
+            validValues = validValues.concat(this.sma5Values.filter(v => v != null));
+        }
+        if (this.showSma20 && this.sma20Values) {
+            validValues = validValues.concat(this.sma20Values.filter(v => v != null));
+        }
+        if (this.showForecast && this.forecastValues) {
+            validValues = validValues.concat(this.forecastValues.filter(v => v != null));
+        }
         if (validValues.length === 0) return;
 
-        // Calculate value range with padding
         let minVal = Math.min(...validValues);
         let maxVal = Math.max(...validValues);
         if (this.thresholdValue != null) {
             minVal = Math.min(minVal, this.thresholdValue);
             maxVal = Math.max(maxVal, this.thresholdValue);
         }
-        // Add 10% padding to avoid lines touching edges
         const range = maxVal - minVal || 1;
         minVal -= range * 0.1;
         maxVal += range * 0.1;
 
-        // Scaling functions: map data values ↔ pixel positions
         const xScale = (i) => padding.left + (i / (this.timeLabels.length - 1)) * chartW;
         const yScale = (v) => padding.top + chartH * (1 - (v - minVal) / (maxVal - minVal));
 
@@ -149,7 +157,6 @@ class TimeSeriesChart {
             ctx.stroke();
             ctx.setLineDash([]);
 
-            // Label
             ctx.fillStyle = this._getColor('--chart-threshold');
             ctx.font = '600 10px Inter, sans-serif';
             ctx.textAlign = 'right';
@@ -161,7 +168,23 @@ class TimeSeriesChart {
             ctx.restore();
         }
 
-        // ---- LAYER 3: Data Line ----
+        // ---- LAYER 2.5: SMA overlay lines ----
+        if (this.showSma5 && this.sma5Values) {
+            const color = this._getColor('--chart-line-2');
+            this._drawLine(ctx, this.sma5Values, xScale, yScale, color, 1.5, [4, 3]);
+        }
+        if (this.showSma20 && this.sma20Values) {
+            const color = this._getColor('--chart-line-3');
+            this._drawLine(ctx, this.sma20Values, xScale, yScale, color, 1.5, [2, 2]);
+        }
+
+        // ---- LAYER 2.7: Forecast projection line ----
+        if (this.showForecast && this.forecastValues) {
+            const color = this._getColor('--chart-line-4');
+            this._drawLine(ctx, this.forecastValues, xScale, yScale, color, 2.0, [6, 4]);
+        }
+
+        // ---- LAYER 3: Raw Data Line ----
         ctx.save();
         ctx.strokeStyle = this.lineColor;
         ctx.lineWidth = 2.5;
@@ -186,12 +209,20 @@ class TimeSeriesChart {
         }
         ctx.stroke();
 
-        // Gradient fill under the line
+        // Gradient fill under the raw line
         const gradient = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartH);
-        gradient.addColorStop(0, this.lineColor.replace(')', ', 0.2)').replace('oklch', 'oklch'));
-        // Fallback if oklch doesn't work in gradient
-        gradient.addColorStop(0, `rgba(88, 166, 255, 0.15)`);
-        gradient.addColorStop(1, `rgba(88, 166, 255, 0)`);
+        const stopColor = this._getTranslucentColor(this.lineColor, 0.15);
+        try {
+            gradient.addColorStop(0, stopColor);
+        } catch (e) {
+            console.warn("Failed to set gradient start color:", stopColor, e);
+            gradient.addColorStop(0, 'rgba(45, 212, 191, 0.15)');
+        }
+        try {
+            gradient.addColorStop(1, 'rgba(45, 212, 191, 0)');
+        } catch (e) {
+            gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        }
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
@@ -215,18 +246,67 @@ class TimeSeriesChart {
         ctx.fill();
         ctx.restore();
 
+        // ---- LAYER 3.5: Anomaly Markers ----
+        if (this.showAnomalies && this.anomalies) {
+            ctx.save();
+            for (let i = 0; i < this.values.length; i++) {
+                const anomaly = this.anomalies[i];
+                if (anomaly && this.values[i] != null) {
+                    const x = xScale(i);
+                    const y = yScale(this.values[i]);
+                    ctx.beginPath();
+                    ctx.arc(x, y, 6, 0, Math.PI * 2);
+                    ctx.fillStyle = anomaly.severity === 'severe' ? this._getColor('--aqi-unhealthy') : this._getColor('--aqi-moderate');
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 1.5;
+                    ctx.fill();
+                    ctx.stroke();
+                }
+            }
+            ctx.restore();
+        }
+
         // ---- LAYER 4: X-Axis Labels ----
         this._drawXLabels(ctx, padding, chartW, chartH, xScale, height);
 
         // ---- LAYER 5: Hover Tooltip ----
-        if (this._hoverIndex >= 0 && this._hoverIndex < this.values.length && this.values[this._hoverIndex] != null) {
-            this._drawTooltip(ctx, xScale, yScale, padding, chartH);
+        if (this._hoverIndex >= 0 && this._hoverIndex < this.timeLabels.length) {
+            const hasRaw = this.values[this._hoverIndex] != null;
+            const hasForecast = this.showForecast && this.forecastValues && this.forecastValues[this._hoverIndex] != null;
+            if (hasRaw || hasForecast) {
+                this._drawTooltip(ctx, xScale, yScale, padding, chartH);
+            }
         }
     }
 
-    /**
-     * Draw horizontal grid lines and Y-axis labels.
-     */
+    _drawLine(ctx, values, xScale, yScale, color, lineWidth, lineDash = []) {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lineWidth;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        if (lineDash.length) ctx.setLineDash(lineDash);
+        ctx.beginPath();
+
+        let started = false;
+        for (let i = 0; i < values.length; i++) {
+            if (values[i] == null) {
+                started = false;
+                continue;
+            }
+            const x = xScale(i);
+            const y = yScale(values[i]);
+            if (!started) {
+                ctx.moveTo(x, y);
+                started = true;
+            } else {
+                ctx.lineTo(x, y);
+            }
+        }
+        ctx.stroke();
+        ctx.restore();
+    }
+
     _drawGrid(ctx, padding, chartW, chartH, minVal, maxVal, yScale, width) {
         const gridColor = this._getColor('--chart-grid');
         const axisColor = this._getColor('--chart-axis');
@@ -286,9 +366,11 @@ class TimeSeriesChart {
     _drawTooltip(ctx, xScale, yScale, padding, chartH) {
         const i = this._hoverIndex;
         const x = xScale(i);
-        const y = yScale(this.values[i]);
-        const value = this.values[i];
         const time = this.timeLabels[i]?.substring(11, 16) || '';
+
+        const focusValue = this.values[i] != null ? this.values[i] : (this.forecastValues ? this.forecastValues[i] : null);
+        if (focusValue == null) return;
+        const y = yScale(focusValue);
 
         // Data point dot
         ctx.save();
@@ -314,14 +396,36 @@ class TimeSeriesChart {
         ctx.stroke();
         ctx.setLineDash([]);
 
-        // Tooltip box
-        const text = `${value.toFixed(1)} · ${time}`;
-        ctx.font = '600 12px JetBrains Mono, monospace';
-        const textWidth = ctx.measureText(text).width;
-        const boxW = textWidth + 16;
-        const boxH = 28;
+        // Collect lines to display
+        const lines = [`Time: ${time}`];
+        if (this.values[i] != null) {
+            lines.push(`${this.label}: ${this.values[i].toFixed(1)}`);
+        }
+        if (this.showSma5 && this.sma5Values && this.sma5Values[i] != null) {
+            lines.push(`SMA-5h: ${this.sma5Values[i].toFixed(1)}`);
+        }
+        if (this.showSma20 && this.sma20Values && this.sma20Values[i] != null) {
+            lines.push(`SMA-20h: ${this.sma20Values[i].toFixed(1)}`);
+        }
+        if (this.showForecast && this.forecastValues && this.forecastValues[i] != null) {
+            lines.push(`Forecast: ${this.forecastValues[i].toFixed(1)}`);
+        }
+        if (this.showAnomalies && this.anomalies && this.anomalies[i]) {
+            lines.push(`ALERT: ${this.anomalies[i].severity === 'severe' ? '⚠️ Severe' : '💡 Mod'} Anomaly`);
+        }
+
+        // Tooltip box sizing
+        ctx.font = '600 11px JetBrains Mono, monospace';
+        let maxTextW = 0;
+        for (const line of lines) {
+            maxTextW = Math.max(maxTextW, ctx.measureText(line).width);
+        }
+        
+        const boxW = maxTextW + 16;
+        const lineH = 15;
+        const boxH = 10 + lines.length * lineH;
         const boxX = Math.min(Math.max(x - boxW / 2, padding.left), padding.left + (this.canvas.clientWidth - padding.left - padding.right) - boxW);
-        const boxY = y - boxH - 14;
+        const boxY = Math.min(Math.max(y - boxH - 14, 5), this.canvas.clientHeight - boxH - 5);
 
         // Background
         ctx.fillStyle = this._getColor('--bg-elevated');
@@ -331,10 +435,24 @@ class TimeSeriesChart {
         ctx.fill();
         ctx.stroke();
 
-        // Text
+        // Text rendering
         ctx.fillStyle = this._getColor('--text-primary');
-        ctx.textAlign = 'center';
-        ctx.fillText(text, boxX + boxW / 2, boxY + 18);
+        ctx.textAlign = 'left';
+        for (let j = 0; j < lines.length; j++) {
+            // Color anomalies red/amber
+            if (lines[j].startsWith('ALERT:')) {
+                ctx.fillStyle = lines[j].includes('Severe') ? this._getColor('--aqi-unhealthy') : this._getColor('--aqi-moderate');
+            } else if (lines[j].startsWith('SMA-5h:')) {
+                ctx.fillStyle = this._getColor('--chart-line-2');
+            } else if (lines[j].startsWith('SMA-20h:')) {
+                ctx.fillStyle = this._getColor('--chart-line-3');
+            } else if (lines[j].startsWith('Forecast:')) {
+                ctx.fillStyle = this._getColor('--chart-line-4');
+            } else {
+                ctx.fillStyle = this._getColor('--text-primary');
+            }
+            ctx.fillText(lines[j], boxX + 8, boxY + 14 + j * lineH);
+        }
 
         ctx.restore();
     }
@@ -362,6 +480,47 @@ class TimeSeriesChart {
      */
     _getColor(varName) {
         return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() || '#888';
+    }
+
+    /**
+     * Helper: convert a CSS color string to a translucent rgba/oklch color.
+     */
+    _getTranslucentColor(colorStr, alpha) {
+        if (!colorStr) return `rgba(88, 166, 255, ${alpha})`;
+        colorStr = colorStr.trim();
+        
+        // 1. If it's hex (like #14b8a6)
+        if (colorStr.startsWith('#')) {
+            let hex = colorStr.substring(1);
+            if (hex.length === 3) {
+                hex = hex.split('').map(char => char + char).join('');
+            }
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        }
+        
+        // 2. If it's rgb/rgba
+        if (colorStr.startsWith('rgb')) {
+            const matches = colorStr.match(/\d+/g);
+            if (matches && matches.length >= 3) {
+                return `rgba(${matches[0]}, ${matches[1]}, ${matches[2]}, ${alpha})`;
+            }
+        }
+        
+        // 3. If it's oklch
+        if (colorStr.startsWith('oklch')) {
+            // Check if there is already a slash inside (e.g. oklch(L C H / A))
+            if (colorStr.includes('/')) {
+                // Replace everything after / with alpha
+                return colorStr.replace(/\/[\s\d\.]+\)/, `/ ${alpha})`);
+            }
+            // Otherwise, replace closing paren
+            return colorStr.replace(')', ` / ${alpha})`);
+        }
+        
+        return colorStr;
     }
 
     /**
