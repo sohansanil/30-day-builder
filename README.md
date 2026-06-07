@@ -29,7 +29,7 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 | 2 | HTML, CSS & How the Web Works | CSS Grid/Subgrid, Container Queries, light-dark() theming | [day-02.md](file:///Users/sohansanil/Documents/linkedin/30-day-builder/days/day-02.md) / [portfolio](file:///Users/sohansanil/Documents/linkedin/30-day-builder/projects/portfolio/index.html) |
 | 3 | JavaScript & Interactivity | DOM manipulation, async animation loops, event delegation, dynamic data widgets | [day-03.md](file:///Users/sohansanil/Documents/linkedin/30-day-builder/days/day-03.md) / [portfolio](file:///Users/sohansanil/Documents/linkedin/30-day-builder/projects/portfolio/index.html) |
 | 4 | Deploy to the Internet | CI/CD pipelines, GitHub Actions, serverless hosting, central journey hub | [day-04.md](file:///Users/sohansanil/Documents/linkedin/30-day-builder/days/day-04.md) / [hub](file:///Users/sohansanil/Documents/linkedin/30-day-builder/index.html) |
-| 5 | APIs: How Apps Talk | | |
+| 5 | APIs & In-Browser Databases | REST APIs, sql.js (WebAssembly), data viz | [AeroIntel Dashboard](projects/aerointel/index.html) |
 | 6 | Git Deep Dive | | |
 | 7 | Phase 1 Retrospective | | |
 
