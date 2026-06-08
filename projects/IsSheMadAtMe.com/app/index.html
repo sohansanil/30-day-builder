@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>IsSheMadAtMe.com — The Relationship Forensics Lab</title>
+  <meta name="description" content="Submit your evidence. Receive a forensic analysis of your situation. Learn whether you need to panic, apologize, or simply put the phone down." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="IsSheMadAtMe.com — Submit your evidence. Get the truth." />
+  <meta property="og:description" content="A forensic analysis service for your situationship. Completely serious in presentation. Completely unserious in premise." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://isshemadatme.com" />
+  <meta property="og:image" content="/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="IsSheMadAtMe.com — Submit your evidence. Get the truth." />
+  <meta name="twitter:description" content="A forensic analysis service for your situationship." />
+  <meta name="twitter:image" content="/og-image.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Fonts: Playfair Display (serif), IBM Plex Mono (monospace), Inter (sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body data-view="landing">
+
+  <!-- ============================================================ -->
+  <!-- VIEW: LANDING                                                 -->
+  <!-- ============================================================ -->
+  <main id="view-landing" class="view">
+
+    <!-- Nav -->
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/" class="nav-logo" id="nav-logo">
+        <span class="lab-name-short">IsSheMadAtMe.com</span>
+      </a>
+      <button class="btn btn--nav" id="nav-cta" type="button">Open a Case</button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero-section">
+      <h1 class="hero__headline">Submit your evidence.<br />Get the truth.</h1>
+      <p class="hero__sub">
+        Upload a screenshot. Receive a forensic analysis of your situation.
+        Learn whether you need to panic, apologize, or simply put the phone down.
+      </p>
+
+      <div class="hero__stats">
+        <div class="stat-row"><span class="stat-label">CASES REVIEWED:</span><span class="stat-value">4,291,882</span></div>
+        <div class="stat-row"><span class="stat-label">FALSE ALARMS:</span><span class="stat-value">93%</span></div>
+        <div class="stat-row stat-row--has-tooltip" data-tooltip="Case #440921: Outcome disputed"><span class="stat-label">RELATIONSHIPS SAVED:</span><span class="stat-value">2</span></div>
+        <div class="stat-row"><span class="stat-label">PHONES THROWN ACROSS ROOMS:</span><span class="stat-value">17,442</span></div>
+      </div>
+    </section>
+
+    <!-- Upload Zone -->
+    <section class="upload-section" id="upload-section">
+      
+      <div class="warning-ticker" id="warning-ticker" aria-live="polite">
+        WARNING: A reply of "okay" may indicate active disengagement.
+      </div>
+
+      <div class="upload-zone" id="upload-zone" role="button" tabindex="0" aria-label="Upload screenshot evidence">
+        <div class="upload-zone__idle" id="upload-idle">
+          <svg class="upload-zone__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="8" y="6" width="24" height="32" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="14" y1="16" x2="26" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="26" y2="21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="14" y1="26" x2="22" y2="26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="34" cy="32" r="10" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="41" y1="39" x2="46" y2="44" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <p class="upload-zone__label" id="upload-zone-label">DROP EVIDENCE HERE</p>
+          <p class="upload-zone__hint">Case investigators are standing by.</p>
+        </div>
+        <div class="upload-zone__hover" id="upload-hover" hidden>
+          <p class="upload-zone__label">Release to begin the investigation.</p>
+        </div>
+        <div class="upload-zone__selected" id="upload-selected" hidden>
+          <p class="upload-zone__filename" id="upload-filename"></p>
+          <p class="upload-zone__hint">Evidence received. Ready for analysis.</p>
+        </div>
+        <div class="upload-zone__error" id="upload-error" hidden>
+          <p class="upload-zone__error-msg" id="upload-error-msg"></p>
+        </div>
+        <input type="file" id="file-input" accept="image/jpeg,image/png,image/heic,image/webp" hidden aria-hidden="true" />
+      </div>
+
+      <!-- Context Field -->
+      <div class="context-field" id="context-field-wrapper">
+        <label for="context-input" class="context-field__label">Any prior incidents, suspicious activity, or unauthorized emoji deployments? <span class="context-field__optional">(Optional.)</span></label>
+        <textarea
+          id="context-input"
+          class="context-field__input"
+          rows="2"
+          maxlength="500"
+          placeholder='"She used to send 4 hearts. Now I receive 1."'
+        ></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <button class="btn btn--primary btn--submit" id="submit-btn" type="button" disabled>
+        Submit Evidence
+      </button>
+
+      <!-- Acceptable Evidence -->
+      <div class="acceptable-evidence">
+        <h3 class="acceptable-evidence__title">APPROVED INVESTIGATIVE MATERIAL</h3>
+        <div class="acceptable-evidence__lists">
+          <ul class="evidence-list evidence-list--yes">
+            <li>✓ WhatsApp screenshots</li>
+            <li>✓ Instagram DMs</li>
+            <li>✓ "K." messages</li>
+            <li>✓ Sudden emoji extinction events</li>
+            <li>✓ Reply latency incidents</li>
+          </ul>
+          <ul class="evidence-list evidence-list--no">
+            <li>✗ Astrology charts</li>
+            <li>✗ Screenshots cropped before timestamps</li>
+            <li>✗ "Trust me bro"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Supporting text -->
+      <p class="upload-disclaimer">
+        No account required. Your evidence is sent to third-party models and may be used for product improvement. Please redact identifying information. For entertainment purposes only. This office is not responsible for relationship outcomes.
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer" id="site-footer">
+      <div class="footer__inner">
+        <span class="footer__lab">The Relationship Forensics Lab</span>
+        <span class="footer__links">
+          <a href="#" id="footer-about-link">About</a>
+          <span class="footer__sep">|</span>
+          <a href="#" id="footer-case-link">Open a Case</a>
+        </span>
+        <span class="footer__copy">&copy; 2026. Results for entertainment purposes only.</span>
+      </div>
+      <p class="footer__disclaimer">Not a licensed therapist. Not responsible for sent apologies, deleted messages, or 2am decisions.</p>
+    </footer>
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- VIEW: LOADING                                                 -->
+  <!-- ============================================================ -->
+  <main id="view-loading" class="view" hidden>
+    <div class="loading-screen">
+      <div class="loading-console" id="loading-console">
+        <div class="loading-console__header">
+          <span class="loading-rule">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+          <p class="loading-title">THE RELATIONSHIP FORENSICS LAB</p>
+          <p class="loading-subtitle">Case Intake System — Build 3.7.1</p>
+        </div>
+        <div class="loading-console__body" id="loading-body">
+          <!-- Populated dynamically by JS -->
+        </div>
+        <div class="loading-console__footer" id="loading-footer" hidden>
+          <span class="loading-rule">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+          <p class="loading-final" id="loading-final"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- VIEW: REPORT                                                  -->
+  <!-- ============================================================ -->
+  <main id="view-report" class="view" hidden>
+
+    <!-- Report Container -->
+    <article class="report" id="report-container">
+
+      <!-- Report Header -->
+      <header class="report__header" id="report-header">
+        <div class="report__lab-name">THE RELATIONSHIP FORENSICS LAB</div>
+        <div class="report__meta">
+          <span class="report__case-number" id="report-case-number"></span>
+          <span class="report__date" id="report-date"></span>
+        </div>
+        <div class="report__banner" id="report-banner"></div>
+      </header>
+
+      <!-- Section 1: Evidence Summary -->
+      <section class="report__section report__evidence" id="report-evidence">
+        <h2 class="report__section-title">EVIDENCE SUMMARY</h2>
+        <div class="report__evidence-grid" id="report-evidence-grid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- Section 2: Key Findings -->
+      <section class="report__section report__findings" id="report-findings">
+        <h2 class="report__section-title">KEY FINDINGS</h2>
+        <div id="report-findings-list">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- Section 3: Probability Matrix -->
+      <section class="report__section report__matrix" id="report-matrix">
+        <h2 class="report__section-title">BEHAVIORAL PROBABILITY ASSESSMENT</h2>
+        <div class="matrix-grid" id="matrix-grid">
+          <!-- Populated by JS -->
+        </div>
+        <p class="matrix-disclaimer">Probabilities assessed independently. Not a clinical diagnostic.</p>
+      </section>
+
+      <!-- Section 4: The Verdict -->
+      <section class="report__section report__verdict" id="report-verdict">
+        <h2 class="report__section-title">THE VERDICT</h2>
+        <div class="verdict-container" id="verdict-container">
+          <div class="verdict-badge" id="verdict-badge">
+            <!-- Badge with stamp style, populated by JS -->
+          </div>
+          <h3 class="verdict-name" id="verdict-name"></h3>
+          <p class="verdict-statement" id="verdict-statement"></p>
+        </div>
+
+        <!-- Share CTA (after verdict) -->
+        <button class="btn btn--primary btn--share" id="share-btn-primary" type="button">
+          Share Report
+        </button>
+      </section>
+
+      <!-- Section 5: Operative Directives -->
+      <section class="report__section report__directives" id="report-directives">
+        <h2 class="report__section-title">OPERATIVE DIRECTIVES</h2>
+        <div id="report-directives-list">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- Report Footer -->
+      <footer class="report__footer" id="report-footer">
+        <div class="report__footer-rule"></div>
+        <div class="report__footer-meta">
+          <span id="report-footer-case"></span> — <span id="report-footer-date"></span> — The Relationship Forensics Lab
+        </div>
+        <p class="report__footer-disclaimer">
+          This report is classified for personal use. Results for entertainment purposes only.
+          Not to be submitted in court. Not to be used in arguments.
+          Not responsible for sent apologies, deleted messages, or 2am decisions.
+        </p>
+        <p class="report__footer-url">IsSheMadAtMe.com</p>
+      </footer>
+
+      <!-- Run Another Case -->
+      <div class="report__actions">
+        <button class="btn btn--secondary" id="run-another-btn" type="button">Run Another Case</button>
+        <button class="btn btn--primary btn--share" id="share-btn-secondary" type="button">Share Your Results</button>
+      </div>
+    </article>
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- SHARE CARD (hidden, used for image generation)                -->
+  <!-- ============================================================ -->
+  <div id="share-card-container" class="share-card-offscreen" aria-hidden="true">
+    <div class="share-card" id="share-card">
+      <!-- Populated by JS when generating share image -->
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

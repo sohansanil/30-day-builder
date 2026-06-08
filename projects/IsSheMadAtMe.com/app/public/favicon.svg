@@ -1,0 +1,10 @@
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Chat bubble -->
+  <path d="M4 6C4 4.89543 4.89543 4 6 4H20C21.1046 4 22 4.89543 22 6V16C22 17.1046 21.1046 18 20 18H10L6 22V18H6C4.89543 18 4 17.1046 4 16V6Z" stroke="#1A1A1A" stroke-width="1.5" fill="none"/>
+  <!-- Text lines inside bubble -->
+  <line x1="8" y1="9" x2="18" y2="9" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="8" y1="13" x2="15" y2="13" stroke="#1A1A1A" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Magnifying glass -->
+  <circle cx="23" cy="22" r="5" stroke="#1A1A1A" stroke-width="1.5"/>
+  <line x1="26.5" y1="25.5" x2="30" y2="29" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+</svg>
