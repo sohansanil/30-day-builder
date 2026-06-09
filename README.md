@@ -38,7 +38,7 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 
 | Day | Focus | What I Learned | Project |
 |-----|-------|---------------|---------|
-| 8 | React & Components | React component model, state, JSX | React Portfolio |
+| 8 | Full Stack MVP | PostgreSQL, Prisma, ETL Pipelines, Next.js | [World Cup Intelligence Lab](projects/world_cup_intelligence_hub) |
 | 9-10 | IPL Match Simulator | Monte Carlo simulations, Recharts viz | IPL Simulator MVP |
 | 11 | FastAPI Backends | FastAPI, API design, server-side simulation | IPL FastAPI API |
 | 12 | Databases & Supabase | SQL queries, Supabase DB modeling | Startup Explorer DB |
