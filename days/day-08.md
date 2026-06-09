@@ -8,6 +8,8 @@ After an intensive sprint, I successfully completed and launched the **World Cup
 
 This project evolved from a complex historical dataset into a premium, interactive web application capable of mathematically quantifying football dominance across 94 years of FIFA World Cup history. The primary goal was to answer the age-old debate of "who is the greatest nation" not through bias or recency, but through objective data analysis.
 
+**Live Project:** [World Cup Intelligence Lab](https://worldcupintelligencehub.vercel.app)
+
 ## Tech Stack
 
 - **Frontend**: Next.js 14 (App Router), React, Tailwind CSS, Recharts
