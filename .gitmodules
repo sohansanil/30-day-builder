@@ -1,0 +1,3 @@
+[submodule "projects/world_cup_intelligence_hub"]
+	path = projects/world_cup_intelligence_hub
+	url = https://github.com/sohansanil/world-cup-intelligence-lab
