@@ -39,7 +39,7 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 | Day | Focus | What I Learned | Project |
 |-----|-------|---------------|---------|
 | 8 | Full Stack MVP | PostgreSQL, Prisma, ETL Pipelines, Next.js | [World Cup Lab (Live)](https://worldcupintelligencehub.vercel.app) |
-| 9-10 | IPL Match Simulator | Monte Carlo simulations, Recharts viz | IPL Simulator MVP |
+| 9-10 | AI Recommendation Engine | Next.js, PyTorch Embeddings, Jikan API | [AniMatch (Live)](https://animatch-web-flax.vercel.app) |
 | 11 | FastAPI Backends | FastAPI, API design, server-side simulation | IPL FastAPI API |
 | 12 | Databases & Supabase | SQL queries, Supabase DB modeling | Startup Explorer DB |
 | 13 | Authentication | Supabase Auth, protected routing | Auth Startup Explorer |
@@ -64,7 +64,7 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 | Day | Focus | What I Learned | Project |
 |-----|-------|---------------|---------|
 | 23 | PWA & Offline Support | Service workers, IndexedDB, offline sync | PWA Expense Tracker |
-| 24 | Recommendation Engines | Content-based & collaborative filtering | [AniMatch (Live)](https://animatch-web-flax.vercel.app) |
+| 24 | Recommendation Engines | Content-based & collaborative filtering | CourseCompass |
 | 25 | Document AI & RAG | Embeddings, vector search, retrieval loops | ResearchBuddy RAG |
 | 26 | Real-time Data | WebSockets, Supabase Realtime | Live Predictions |
 | 27 | Open Source & Community | Contributing.md, issues, community contribution | OS PR |
