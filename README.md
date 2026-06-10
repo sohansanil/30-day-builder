@@ -64,7 +64,7 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 | Day | Focus | What I Learned | Project |
 |-----|-------|---------------|---------|
 | 23 | PWA & Offline Support | Service workers, IndexedDB, offline sync | PWA Expense Tracker |
-| 24 | Recommendation Engines | Content-based & collaborative filtering | CourseCompass |
+| 24 | Recommendation Engines | Content-based & collaborative filtering | [AniMatch (Live)](https://animatch-web-flax.vercel.app) |
 | 25 | Document AI & RAG | Embeddings, vector search, retrieval loops | ResearchBuddy RAG |
 | 26 | Real-time Data | WebSockets, Supabase Realtime | Live Predictions |
 | 27 | Open Source & Community | Contributing.md, issues, community contribution | OS PR |
