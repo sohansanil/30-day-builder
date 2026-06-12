@@ -39,7 +39,8 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 | Day | Focus | What I Learned | Project |
 |-----|-------|---------------|---------|
 | 8 | Full Stack MVP | PostgreSQL, Prisma, ETL Pipelines, Next.js | [World Cup Lab (Live)](https://worldcupintelligencehub.vercel.app) |
-| 9-10 | AI Recommendation Engine | Next.js, PyTorch Embeddings, Jikan API | [AniMatch (Live)](https://animatch-web-flax.vercel.app) |
+| 9 | AI Recommendation Engine | Next.js, PyTorch Embeddings, Jikan API | [AniMatch (Live)](https://animatch-web-flax.vercel.app) |
+| 10 | Decision Science | Next.js, Math Combinatorics | [Sohan's Edge (Live)](https://sohans-edge.vercel.app) |
 | 11 | FastAPI Backends | FastAPI, API design, server-side simulation | IPL FastAPI API |
 | 12 | Databases & Supabase | SQL queries, Supabase DB modeling | Startup Explorer DB |
 | 13 | Authentication | Supabase Auth, protected routing | Auth Startup Explorer |
