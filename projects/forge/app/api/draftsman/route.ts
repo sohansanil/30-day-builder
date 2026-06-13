@@ -24,7 +24,7 @@ Constraints: ${context.constraints || 'None'}
     console.error("Draftsman Error:", error);
     return NextResponse.json(
       { error: (error as Error).message || "Failed to process request" },
-      { status: 500 || 500 }
+      { status: 500 }
     );
   }
 }
