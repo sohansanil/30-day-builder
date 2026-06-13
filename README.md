@@ -42,7 +42,7 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 | 9 | AI Recommendation Engine | Next.js, PyTorch Embeddings, Jikan API | [AniMatch (Live)](https://animatch-web-flax.vercel.app) |
 | 10 | Decision Science | Next.js, Math Combinatorics | [Sohan's Edge (Live)](https://sohans-edge.vercel.app) |
 | 11 | Multi-Agent Orchestration | Gemini Flash, Next.js, AI Pipeline Design | [Forge AI Architect (Live)](https://forge-sohansanil.vercel.app) |
-| 12 | Databases & Supabase | SQL queries, Supabase DB modeling | Startup Explorer DB |
+| 12 | Framer Motion & Viral UI | Animation physics, html2canvas, Web Audio | [Startup Roulette (Live)](https://startup-roulette.vercel.app) |
 | 13 | Authentication | Supabase Auth, protected routing | Auth Startup Explorer |
 | 14 | Phase 2 Retrospective | Deploying full-stack web products | Live Deployment |
 
