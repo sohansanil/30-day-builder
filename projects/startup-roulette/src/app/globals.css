@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  --color-casino-gold: #f5d76e;
+  --color-casino-gold-dark: #c2a13f;
+  --color-casino-red: #e74c3c;
+  --color-casino-red-dark: #c0392b;
+  --color-casino-bg: #120e23;
+  --color-casino-bg-light: #1f1a36;
+}
+
+:root {
+  --background: var(--color-casino-bg);
+  --foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
