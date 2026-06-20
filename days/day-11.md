@@ -1,7 +1,7 @@
 # Day 11
 
 Project: Forge
-Live Demo: (Pending Vercel Deployment)
+Live Demo: https://forge-pearl-eight.vercel.app
 GitHub: https://github.com/sohansanil/30-day-builder/tree/main/projects/forge
 
 Goal:
