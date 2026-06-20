@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoFocus Knowledge Vault</title>
+  <link rel="stylesheet" href="popup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-left">
+        <img src="../icons/icon-48.png" alt="SoFocus" class="logo">
+        <h1>Knowledge Vault</h1>
+      </div>
+      <button id="export-btn" class="secondary-btn" title="Export as Markdown">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Export
+      </button>
+    </header>
+
+    <div class="shortcut-banner" id="shortcut-banner" style="display: none;">
+      <div class="banner-content">
+        <span>💡 Hint: Use <strong>Ctrl+Shift+S</strong> to capture insights instantly while watching.</span>
+        <button id="settings-link" class="text-btn">Change Hotkey</button>
+      </div>
+    </div>
+
+    <main id="library-container">
+      <section id="dashboard-container" style="display: none;">
+        <div class="dashboard-stats">
+          <div class="stat-card streak-card">
+            <span class="stat-icon">🔥</span>
+            <div class="stat-details">
+              <span class="stat-value" id="current-streak">0</span>
+              <span class="stat-label">Day Streak</span>
+              <div class="stat-sub" id="longest-streak">Best: 0</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">📚</span>
+            <div class="stat-details">
+              <span class="stat-value" id="total-videos">0</span>
+              <span class="stat-label">Videos</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">💡</span>
+            <div class="stat-details">
+              <span class="stat-value" id="total-insights">0</span>
+              <span class="stat-label">Insights</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-heatmap-section">
+          <h4 class="section-title">This Month</h4>
+          <div class="dashboard-heatmap" id="learning-heatmap">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <div class="dashboard-topics-section">
+          <h4 class="section-title">Recent Learning</h4>
+          <div class="topic-tags" id="recent-topics">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <div id="key-insight-container" style="display: none;">
+        <div class="key-insight-header">
+          <span class="key-insight-icon">⭐</span>
+          <span class="key-insight-title">Today's Key Insight</span>
+        </div>
+        <div class="key-insight-content" id="key-insight-content">
+          <!-- Content injected here -->
+        </div>
+      </div>
+
+      <div class="empty-state" id="empty-state" style="display: none;">
+        <div class="empty-icon">💡</div>
+        <div class="empty-text">Capture your first insight.</div>
+        <div class="empty-subtext">Press <kbd>Cmd+Shift+S</kbd> (or <kbd>Ctrl+Shift+S</kbd>) while watching a tutorial to lock knowledge in.</div>
+      </div>
+      
+      <div id="video-list">
+        <!-- Rendered by JS -->
+      </div>
+    </main>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
