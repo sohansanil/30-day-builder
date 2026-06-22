@@ -44,7 +44,7 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 | 11 | Multi-Agent Orchestration | Gemini Flash, Next.js, AI Pipeline Design | [Forge AI Architect (Live)](https://forge-sohansanil.vercel.app) |
 | 12 | Framer Motion & Viral UI | Animation physics, html2canvas, Web Audio | [Startup Roulette (Live)](https://startup-roulette.vercel.app) |
 | 13 | Chrome Extension | Vanilla JS, Shadow DOM, Chrome API | [SoFocus Repo](projects/sofocus) |
-| 14 | Personal Knowledge OS | RAG, Supabase pgvector, FastAPI, Next.js | [SoCortex Repo](projects/SoCortex) |
+| 14 | Personal Knowledge OS | RAG, Supabase pgvector, FastAPI, Next.js | [SoCortex (Live)](https://web-khaki-mu-15.vercel.app) |
 
 ### Phase 3: AI-Powered Products (Days 15–22)
 > NLP, structured scoring, AI integration, anomaly detection, Chrome extensions
