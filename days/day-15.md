@@ -6,6 +6,14 @@
 ## What I Built
 SMEPay Scout is an internal strategic tool that actively monitors the market and tells the product team exactly what features to build next to steal market share. It functions as an AI Product Strategy Analyst.
 
+## Screenshots
+<div align="center">
+  <img src="../assets/smepay_scout/dashboard-1.png" width="45%" alt="Dashboard Top" />
+  <img src="../assets/smepay_scout/dashboard-2.png" width="45%" alt="Dashboard Middle" />
+  <img src="../assets/smepay_scout/dashboard-3.png" width="45%" alt="Dashboard Lower" />
+  <img src="../assets/smepay_scout/dashboard-4.png" width="45%" alt="Dashboard Bottom" />
+</div>
+
 1. **Live Data Ingestion Pipeline:** A custom web scraper that pulls real-time grievances and reviews from competitor merchant apps (BharatPe, PhonePe Business, Paytm Business) on the Google Play Store, bypassing traditional API limitations.
 2. **AI Intelligence Engine:** Integrates Google Gemini 1.5 Pro to synthesize raw unstructured reviews into an actionable JSON strategy payload.
 3. **Executive Dashboard:** A Next.js frontend built with TailwindCSS that strictly adheres to SMEPay's brand identity (Forest Green & Vibrant Leaf Green). It features a Market Pulse score, Critical Pain Points, Win Zones, and an Opportunity Engine.
