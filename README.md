@@ -51,7 +51,7 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 
 | Day | Focus | What I Learned | Project |
 |-----|-------|---------------|---------|
-| 15 | Product Thinking | MVP scoping, wireframing, feature priorities | ResumeAI Design |
+| 15 | AI Strategy Automation | Web Scraping, Gemini Pro, Next.js | [SMEPay Scout](projects/smepay_scout) |
 | 16-17 | ResumeAI Analyzer | PDF parsing, NLP keyword extraction, Gemini API | ResumeAI MVP |
 | 18 | Product Analytics | Data seeding, user metrics, admin dashboard | Admin Dashboard |
 | 19 | Smart Expense Tracker | Spend forecasting, anomaly detection | Expense Tracker |

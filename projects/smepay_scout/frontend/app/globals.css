@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-forest: #0A3C2B;
+  --color-brand-vibrant: #80CD27;
+  --color-brand-cream: #FCFBF7;
+  --color-brand-surface: #FFFFFF;
+  --color-brand-surface-alt: #F4F8F4;
+  --color-brand-red: #E11D48;
+  --color-brand-amber: #F59E0B;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-cream text-brand-forest antialiased;
+  }
+}
+
+.glass-panel {
+  @apply bg-brand-surface shadow-sm border border-slate-200 rounded-xl;
+}
+
+.glass-panel-hover {
+  @apply hover:shadow-md hover:border-brand-vibrant/50 transition-all duration-300;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-forest to-brand-vibrant;
+}
+
+.gradient-text-amber {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-amber to-orange-400;
+}
