@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+/* ============================================================
+   SoEchoes Design Tokens
+   ============================================================ */
+:root {
+  /* Backgrounds */
+  --bg:             #0d0c0b;
+  --surface:        #151412;
+  --surface-hover:  #1a1916;
+
+  /* Glass */
+  --glass-bg:       rgba(255, 240, 200, 0.04);
+  --glass-border:   rgba(255, 240, 200, 0.08);
+  --glass-blur:     12px;
+
+  /* Text */
+  --text-primary:   #f0e6d3;
+  --text-secondary: #b8a48a;
+  --text-muted:     #9a8a72;
+  --text-dim:       #6a5a48;
+
+  /* Accent — candlelight amber */
+  --accent:         #d4956a;
+  --accent-soft:    rgba(212, 149, 106, 0.15);
+  --accent-glow:    rgba(212, 149, 106, 0.25);
+
+  /* Category Colors */
+  --love:           #c97b7b;
+  --chaos:          #c9a84c;
+  --regret:         #7b92b5;
+  --growth:         #7da888;
+  --latenight:      #8b80b5;
+  --milestone:      #d4956a;
+  --forsomeone:     #c4845a;
+
+  /* Fonts — loaded via next/font/google, referenced by CSS variable */
+  --font-display:   var(--font-display-loaded), Georgia, serif;
+  --font-body:      var(--font-body-loaded), system-ui, sans-serif;
+  --font-memory:    var(--font-memory-loaded), Georgia, serif;
+
+  /* Map pins */
+  --pin-default:    #d4956a;
+  --pin-spot:       #f0b47a;
+}
+
+/* ============================================================
+   Base Reset
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   Grain / Noise Overlay — the "not AI" texture
+   ============================================================ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ============================================================
+   Typography
+   ============================================================ */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.font-memory {
+  font-family: var(--font-memory);
+  font-style: italic;
+}
+
+/* ============================================================
+   Glassmorphism Card
+   ============================================================ */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+/* ============================================================
+   Custom Scrollbar
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-soft);
+  border-radius: 2px;
+}
+
+/* ============================================================
+   Map Overrides (Leaflet)
+   ============================================================ */
+.leaflet-container {
+  background: var(--bg) !important;
+  font-family: var(--font-body) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(10, 9, 7, 0.8) !important;
+  color: var(--text-dim) !important;
+  font-size: 9px !important;
+  backdrop-filter: blur(4px);
+}
+
+.leaflet-control-attribution a {
+  color: var(--text-muted) !important;
+}
+
+.leaflet-control-zoom a {
+  background: var(--surface) !important;
+  color: var(--text-muted) !important;
+  border-color: var(--glass-border) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--surface-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ============================================================
+   Memory Pin Pulse (for Spots)
+   ============================================================ */
+@keyframes spot-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%       { transform: scale(1.4); opacity: 0; }
+}
+
+.spot-pulse-ring {
+  animation: spot-pulse 2.5s ease-in-out infinite;
+}
+
+/* ============================================================
+   Accent Button
+   ============================================================ */
+.btn-accent {
+  background: var(--accent);
+  color: #0a0907;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.btn-accent:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 100px;
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 240, 200, 0.08);
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   Category Badge
+   ============================================================ */
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  border: 1px solid transparent;
+}
+
+/* ============================================================
+   View Transitions
+   ============================================================ */
+@view-transition {
+  navigation: auto;
+}
+/* Pin Drop Ceremony Animations */
+.animate-drop-pin {
+  animation: pinDrop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes pinDrop {
+  0% { transform: translateY(calc(-50% - 200px)); opacity: 0; }
+  60% { transform: translateY(calc(-50% + 15px)); opacity: 1; }
+  100% { transform: translateY(-50%); opacity: 1; }
+}
+
+.animate-ripple {
+  position: absolute;
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: pinRipple 2s cubic-bezier(0.0, 0.0, 0.2, 1) infinite;
+  transform: translateY(50%);
+  pointer-events: none;
+}
+
+@keyframes pinRipple {
+  0% { transform: scale(1) translateY(50%); opacity: 0.8; }
+  100% { transform: scale(8) translateY(50%); opacity: 0; }
+}
+
+/* Cluster Marker Brand Overrides */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  background-color: rgba(163, 97, 50, 0.4) !important;
+}
+.marker-cluster-small div,
+.marker-cluster-medium div,
+.marker-cluster-large div {
+  background-color: rgba(163, 97, 50, 0.9) !important;
+  color: #fff !important;
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+}

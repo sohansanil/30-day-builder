@@ -52,7 +52,8 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 | Day | Focus | What I Learned | Project |
 |-----|-------|---------------|---------|
 | 15 | AI Strategy Automation | Web Scraping, Gemini Pro, Next.js | [SMEPay Scout](projects/smepay_scout) |
-| 16-17 | ResumeAI Analyzer | PDF parsing, NLP keyword extraction, Gemini API | ResumeAI MVP |
+| 16 | Hardware Integration | WebSockets, Web Audio API, Python | [FoldDeck Pro](projects/FoldDeck) |
+| 17 | ResumeAI Analyzer | PDF parsing, NLP keyword extraction, Gemini API | ResumeAI MVP |
 | 18 | Product Analytics | Data seeding, user metrics, admin dashboard | Admin Dashboard |
 | 19 | Smart Expense Tracker | Spend forecasting, anomaly detection | Expense Tracker |
 | 20 | Chrome Extensions | Manifest V3, site tracking browser APIs | FocusLens Extension |

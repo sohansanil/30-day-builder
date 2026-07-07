@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoldDeck Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Toolbar -->
+        <header class="top-bar">
+            <div class="deck-header left">
+                <div class="sync-btn">SYNC</div>
+                <div class="bpm">128.0</div>
+            </div>
+            <div class="center-header">
+                <h1>FOLD<span class="accent">DECK</span> PRO</h1>
+                <!-- MacBook Angle Indicator moved to top center -->
+                <div class="angle-status">
+                    <span id="angle-display">WAITING FOR SENSOR...</span>
+                </div>
+            </div>
+            <div class="deck-header right">
+                <div class="bpm">128.0</div>
+                <div class="sync-btn">SYNC</div>
+            </div>
+        </header>
+
+        <!-- Main Decks and Mixer Area -->
+        <main class="main-stage">
+            
+            <!-- DECK A (Active) -->
+            <section class="deck" id="deck-a">
+                <div class="waveform-container">
+                    <canvas id="waveform-canvas-a" width="400" height="80"></canvas>
+                </div>
+                <div class="turntable-container">
+                    <div class="platter-ring">
+                        <img id="dial-a" src="vinyl.png" class="vinyl-record" alt="Vinyl Record A">
+                    </div>
+                    <!-- CSS Tonearm -->
+                    <div class="tonearm">
+                        <div class="tonearm-pivot"></div>
+                        <div class="tonearm-rod"></div>
+                        <div class="tonearm-head"></div>
+                    </div>
+                    <div class="play-controls">
+                        <button class="btn-cue">CUE</button>
+                        <button class="btn-play">▶</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CENTRAL MIXER -->
+            <section class="mixer">
+                <!-- EQ Knobs Left -->
+                <div class="channel channel-left">
+                    <div class="knob-label">HIGH</div>
+                    <div class="knob"></div>
+                    <div class="knob-label">MID</div>
+                    <div class="knob"></div>
+                    <div class="knob-label">LOW</div>
+                    <div class="knob"></div>
+                    <div class="fader-track">
+                        <div class="fader-cap" id="filter-fader-a"></div>
+                    </div>
+                    <div class="knob-label">FILTER</div>
+                </div>
+
+                <!-- Center LED Meter -->
+                <div class="led-meter">
+                    <div class="leds" id="led-strip">
+                        <!-- LED bars injected by CSS/JS -->
+                    </div>
+                </div>
+
+                <!-- EQ Knobs Right -->
+                <div class="channel channel-right">
+                    <div class="knob-label">HIGH</div>
+                    <div class="knob"></div>
+                    <div class="knob-label">MID</div>
+                    <div class="knob"></div>
+                    <div class="knob-label">LOW</div>
+                    <div class="knob"></div>
+                    <div class="fader-track">
+                        <div class="fader-cap" style="bottom: 50%;"></div>
+                    </div>
+                    <div class="knob-label">FILTER</div>
+                </div>
+            </section>
+
+            <!-- DECK B (Visual Only) -->
+            <section class="deck" id="deck-b">
+                <div class="waveform-container">
+                    <canvas id="waveform-canvas-b" width="400" height="80"></canvas>
+                </div>
+                <div class="turntable-container">
+                    <div class="platter-ring">
+                        <img id="dial-b" src="vinyl.png" class="vinyl-record" alt="Vinyl Record B">
+                    </div>
+                    <!-- CSS Tonearm -->
+                    <div class="tonearm">
+                        <div class="tonearm-pivot"></div>
+                        <div class="tonearm-rod"></div>
+                        <div class="tonearm-head"></div>
+                    </div>
+                    <div class="play-controls">
+                        <button class="btn-cue">CUE</button>
+                        <button class="btn-play">▶</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- LIBRARY BROWSER -->
+        <section class="library-stage">
+            <aside class="library-sidebar">
+                <div class="sidebar-item active">🎵 Your Library</div>
+                <div class="sidebar-item">❤️ Liked Songs</div>
+                <div class="sidebar-item">🌴 Chill Out</div>
+                <div class="sidebar-item">🌃 Night Drive</div>
+                <div class="sidebar-item">🤖 Synthwave</div>
+            </aside>
+            
+            <div class="library-grid">
+                <!-- Row 1 -->
+                <div class="track-card">
+                    <img src="album1.png" alt="Album 1">
+                    <div class="track-info">
+                        <div class="track-title">Synthetic Dawn</div>
+                        <div class="track-artist">Neon Drifters <span class="track-bpm">128 BPM</span></div>
+                    </div>
+                </div>
+                <div class="track-card active-track">
+                    <img src="vinyl.png" alt="Vinyl">
+                    <div class="track-info">
+                        <div class="track-title">Geometric Rhythms</div>
+                        <div class="track-artist">Astra <span class="track-bpm">128 BPM</span></div>
+                    </div>
+                </div>
+                <div class="track-card">
+                    <img src="album2.png" alt="Album 2">
+                    <div class="track-info">
+                        <div class="track-title">Harmonic Chaos</div>
+                        <div class="track-artist">Neon Pulse <span class="track-bpm">140 BPM</span></div>
+                    </div>
+                </div>
+                <div class="track-card">
+                    <img src="album3.png" alt="Album 3">
+                    <div class="track-info">
+                        <div class="track-title">Neon Arcade</div>
+                        <div class="track-artist">Cyber Alley <span class="track-bpm">115 BPM</span></div>
+                    </div>
+                </div>
+                
+                <!-- Row 2 -->
+                <div class="track-card">
+                    <img src="album4.png" alt="Album 4">
+                    <div class="track-info">
+                        <div class="track-title">Signal</div>
+                        <div class="track-artist">Arcade Pulse <span class="track-bpm">120 BPM</span></div>
+                    </div>
+                </div>
+                <div class="track-card">
+                    <div class="fake-album" style="background: #e91e63;"></div>
+                    <div class="track-info">
+                        <div class="track-title">Midnight Run</div>
+                        <div class="track-artist">Lazerhawk <span class="track-bpm">130 BPM</span></div>
+                    </div>
+                </div>
+                <div class="track-card">
+                    <div class="fake-album" style="background: #2196f3;"></div>
+                    <div class="track-info">
+                        <div class="track-title">Ocean Drive</div>
+                        <div class="track-artist">Miami Nights <span class="track-bpm">110 BPM</span></div>
+                    </div>
+                </div>
+                <div class="track-card">
+                    <div class="fake-album" style="background: #ffeb3b;"></div>
+                    <div class="track-info">
+                        <div class="track-title">Sunset Grid</div>
+                        <div class="track-artist">Data Stream <span class="track-bpm">125 BPM</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Controls & Crossfader -->
+        <footer class="bottom-bar">
+            <!-- Upload Button (Moved to left) -->
+            <div class="upload-container">
+                <label for="audio-upload" class="upload-btn">
+                    <span>LOAD TRACK</span>
+                    <input type="file" id="audio-upload" accept="audio/*">
+                </label>
+                <div id="status" style="margin-top:5px;">NO TRACK LOADED</div>
+            </div>
+
+            <!-- Crossfader -->
+            <div class="crossfader-container">
+                <div class="crossfader-track">
+                    <div id="crossfader-cap" class="crossfader-cap"></div>
+                </div>
+                <div id="mode-badge" class="mode-badge">WAITING FOR SENSOR</div>
+            </div>
+
+            <!-- Upload Button -->
+            <div class="upload-container">
+                <label for="audio-upload" class="upload-btn">
+                    <span>LOAD TRACK</span>
+                    <input type="file" id="audio-upload" accept="audio/*">
+                </label>
+                <div id="status">NO TRACK LOADED</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

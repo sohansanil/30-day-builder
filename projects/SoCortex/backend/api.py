@@ -68,7 +68,7 @@ async def chat_endpoint(req: ChatRequest):
     if not embedding:
         raise HTTPException(status_code=500, detail="Failed to generate embedding")
         
-    documents = retrieve_context(embedding, match_count=5)
+    documents = retrieve_context(embedding, match_count=15)
     
     if not documents:
         return {
