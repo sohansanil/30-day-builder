@@ -597,18 +597,18 @@ function CipherApp() {
         addLog("ERROR: Rail Fence key must be a number >= 2.");
         return;
       }
-      let cleanText = input.replace(/\s+/g, '');
+      const cleanText = input.replace(/\s+/g, '');
       if (encrypt) {
-        let fence = Array.from({length: rails}, () => [] as string[]);
+        const fence = Array.from({length: rails}, () => [] as string[]);
         let r = 0, dir = 1;
-        for (let char of cleanText) {
+        for (const char of cleanText) {
           fence[r].push(char);
           r += dir;
           if (r === 0 || r === rails - 1) dir *= -1;
         }
         result = fence.flat().join('');
       } else {
-        let fence = Array.from({length: rails}, () => new Array(cleanText.length).fill(null));
+        const fence = Array.from({length: rails}, () => new Array(cleanText.length).fill(null));
         let r = 0, dir = 1;
         for (let i = 0; i < cleanText.length; i++) {
           fence[r][i] = '*';
@@ -632,25 +632,25 @@ function CipherApp() {
       }
     } else if (mode === 'playfair') {
       let text = input.toUpperCase().replace(/[^A-Z]/g, '').replace(/J/g, 'I');
-      let pKey = key.toUpperCase().replace(/[^A-Z]/g, '').replace(/J/g, 'I');
+      const pKey = key.toUpperCase().replace(/[^A-Z]/g, '').replace(/J/g, 'I');
       if (!pKey) { addLog("ERROR: Playfair needs a valid key."); return; }
       
-      let alphabet = 'ABCDEFGHIKLMNOPQRSTUVWXYZ';
+      const alphabet = 'ABCDEFGHIKLMNOPQRSTUVWXYZ';
       let matrixStr = '';
-      for (let char of pKey + alphabet) {
+      for (const char of pKey + alphabet) {
         if (!matrixStr.includes(char)) matrixStr += char;
       }
       
-      let matrix: string[] = [];
+      const matrix: string[] = [];
       for (let i=0; i<5; i++) matrix.push(matrixStr.slice(i*5, i*5+5));
       
-      let findPos = (char: string) => {
-        let idx = matrixStr.indexOf(char);
+      const findPos = (char: string) => {
+        const idx = matrixStr.indexOf(char);
         return [Math.floor(idx/5), idx%5];
       };
 
       if (encrypt) {
-        let pairs = [];
+        const pairs = [];
         for (let i=0; i<text.length; i+=2) {
           if (i === text.length - 1) pairs.push(text[i] + 'X');
           else if (text[i] === text[i+1]) { pairs.push(text[i] + 'X'); i--; }
@@ -660,10 +660,10 @@ function CipherApp() {
       }
 
       for (let i=0; i<text.length; i+=2) {
-        let [r1, c1] = findPos(text[i]);
-        let [r2, c2] = findPos(text[i+1]);
+        const [r1, c1] = findPos(text[i]);
+        const [r2, c2] = findPos(text[i+1]);
         if (r1 === undefined || r2 === undefined) continue;
-        let shift = encrypt ? 1 : 4; 
+        const shift = encrypt ? 1 : 4; 
         
         if (r1 === r2) {
           result += matrix[r1][(c1 + shift) % 5] + matrix[r2][(c2 + shift) % 5];
@@ -675,11 +675,11 @@ function CipherApp() {
       }
     } else if (mode === 'hill') {
       let text = input.toUpperCase().replace(/[^A-Z]/g, '');
-      let hKey = key.toUpperCase().replace(/[^A-Z]/g, '');
+      const hKey = key.toUpperCase().replace(/[^A-Z]/g, '');
       if (hKey.length !== 4) { addLog("ERROR: Hill key must be exactly 4 letters (e.g. DDCF)."); return; }
       
-      let kVals = [...hKey].map(c => c.charCodeAt(0) - 65);
-      let [a, b, c, d] = kVals;
+      const kVals = [...hKey].map(c => c.charCodeAt(0) - 65);
+      const [a, b, c, d] = kVals;
       let det = (a * d - b * c) % 26;
       det = (det + 26) % 26;
       
@@ -687,7 +687,7 @@ function CipherApp() {
         addLog("ERROR: Key is not invertible mod 26. Try 'DDCF'."); return;
       }
 
-      let modInverse = (a: number, m: number) => {
+      const modInverse = (a: number, m: number) => {
         a = ((a % m) + m) % m;
         for (let x = 1; x < m; x++) if ((a * x) % m === 1) return x;
         return 1;
@@ -695,16 +695,16 @@ function CipherApp() {
 
       let matrix = [a, b, c, d];
       if (!encrypt) {
-        let invDet = modInverse(det, 26);
+        const invDet = modInverse(det, 26);
         matrix = [(d * invDet) % 26, (-b * invDet) % 26, (-c * invDet) % 26, (a * invDet) % 26].map(n => (n + 26) % 26);
       }
 
       if (text.length % 2 !== 0) text += 'X';
       for (let i = 0; i < text.length; i += 2) {
-        let v1 = text.charCodeAt(i) - 65;
-        let v2 = text.charCodeAt(i+1) - 65;
-        let r1 = (matrix[0] * v1 + matrix[1] * v2) % 26;
-        let r2 = (matrix[2] * v1 + matrix[3] * v2) % 26;
+        const v1 = text.charCodeAt(i) - 65;
+        const v2 = text.charCodeAt(i+1) - 65;
+        const r1 = (matrix[0] * v1 + matrix[1] * v2) % 26;
+        const r2 = (matrix[2] * v1 + matrix[3] * v2) % 26;
         result += String.fromCharCode(r1 + 65) + String.fromCharCode(r2 + 65);
       }
     }
