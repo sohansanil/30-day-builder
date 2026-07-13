@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BroCallMe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Web App Manifest for PWA -->
+    <meta name="theme-color" content="#050505">
+</head>
+<body>
+    <div id="app"></div>
+
+    <!-- Template: Dashboard (Homepage) -->
+    <template id="dashboard-view">
+        <!-- Sidebar Overlay -->
+        <div id="sidebar-overlay" class="sidebar-overlay hidden" onclick="app.toggleSidebar()"></div>
+        
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2>Settings</h2>
+                <i class="fas fa-times icon-btn" onclick="app.toggleSidebar()"></i>
+            </div>
+            
+            <div class="sidebar-content mt-4">
+                <div class="glass-card mb-4" style="background: rgba(255,255,255,0.03);">
+                    <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary);" class="mb-3">Difficulty</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600;">Accountability Mode</span>
+                        <i class="fas fa-check text-purple"></i>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="border-color: rgba(239, 68, 68, 0.3);">
+                    <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--red);" class="mb-3">Danger Zone</h3>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.4;">
+                        Wipe your history clean. You can erase the data, but you can't erase the shame.
+                    </p>
+                    <button class="btn-full btn-dark-red" onclick="app.resetStats()">
+                        <i class="fas fa-skull mr-2"></i> Erase My Mistakes
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen dashboard-screen slide-in pb-nav">
+            <header class="top-bar">
+                <i class="fas fa-bars icon-btn" onclick="app.toggleSidebar()"></i>
+                <div class="logo">
+                    BroCallMe <i class="fas fa-bolt text-purple"></i>
+                </div>
+                <i class="far fa-bell icon-btn" onclick="app.showToast('No new notifications.')"></i>
+            </header>
+
+            <div class="mt-4">
+                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">Good evening, Sohan.</h2>
+                <p style="color: var(--text-secondary); font-size: 15px;">People currently disappointed in you:</p>
+            </div>
+
+            <!-- Feed of vertical cards -->
+            <div id="feed-container" class="mt-4 pb-4">
+                <!-- JS will generate feed cards here -->
+            </div>
+
+            <!-- Emergency Panic Button -->
+            <button class="btn-gradient btn-full mt-4" id="dash-panic-btn" style="position: sticky; bottom: 80px; z-index: 50; padding: 20px; font-size: 18px;">
+                + Panic Call Now 🚨
+            </button>
+
+            <!-- Bottom Nav -->
+            <nav class="bottom-nav">
+                <a href="javascript:void(0)" class="nav-item active" onclick="app.navigate('dashboard')"><i class="fas fa-home"></i><span>Home</span></a>
+                <a href="javascript:void(0)" class="nav-item" onclick="app.navigate('add_person')"><i class="fas fa-user-plus"></i><span>Add</span></a>
+                <a href="javascript:void(0)" class="nav-item" onclick="app.showToast('Schedule coming soon!')"><i class="far fa-calendar-alt"></i><span>Schedule</span></a>
+                <a href="javascript:void(0)" class="nav-item" onclick="app.navigate('annual_report')"><i class="far fa-chart-bar"></i><span>Report</span></a>
+            </nav>
+        </div>
+    </template>
+
+    <!-- Template: Person Detail -->
+    <template id="person-detail-view">
+        <div class="screen detail-screen slide-in pb-nav">
+            <header class="top-bar">
+                <i class="fas fa-arrow-left icon-btn" onclick="app.navigate('dashboard')"></i>
+                <h2>Contact Info</h2>
+                <div class="spacer"></div>
+            </header>
+
+            <div class="glass-card mt-4 text-center">
+                <div class="detail-portrait-wrap mx-auto" id="detail-portrait-wrap">
+                    <img src="" id="detail-img" class="portrait-lg" alt="Profile">
+                    <div class="avatar-fallback portrait-lg" id="detail-fallback" style="display: none;"></div>
+                </div>
+                <h2 class="mt-3" id="detail-name" style="font-size: 24px; font-weight: 800;">Name</h2>
+                <p class="text-secondary" id="detail-role">Role</p>
+                <div class="mt-2" id="detail-mood-tag"></div>
+            </div>
+
+            <div class="glass-card mt-4">
+                <h3 class="mb-3" style="font-size: 16px;">Relationship Status</h3>
+                
+                <div class="progress-row mt-2">
+                    <div class="progress-label">
+                        <span>Trust Level</span>
+                        <span id="detail-trust-pct" class="text-green font-weight-bold">0%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar green-gradient" id="detail-trust-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <div class="progress-row mt-4">
+                    <div class="progress-label">
+                        <span>Disappointment</span>
+                        <span id="detail-disapp-pct" class="text-red font-weight-bold">0%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar red-gradient" id="detail-disapp-bar" style="width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid mt-4">
+                    <div class="stat-box">
+                        <span class="val text-green" id="detail-acc">0</span>
+                        <span class="lbl">Calls Answered</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="val text-red" id="detail-ign">0</span>
+                        <span class="lbl">Calls Ignored</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card mt-4 mb-4">
+                <h3 class="mb-3" style="font-size: 16px;">Schedule Accountability Call</h3>
+                
+                <label style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; display: block;">If I don't...</label>
+                <input type="text" class="input-field mb-4" id="call-task" placeholder="e.g. Wake up at 6 AM">
+                
+                <label style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; display: block;">Call me in...</label>
+                <div class="time-pills mb-4">
+                    <div class="pill active" data-time="10">10s</div>
+                    <div class="pill" data-time="30">30s</div>
+                    <div class="pill" data-time="60">1m</div>
+                    <div class="pill" data-time="custom">Custom</div>
+                </div>
+                
+                <button class="btn-full btn-gradient" id="schedule-btn">Schedule Call</button>
+            </div>
+            
+            <button class="btn-full btn-dark-red mb-4" id="detail-panic-btn">Trigger Immediate Call</button>
+        </div>
+    </template>
+
+    <!-- Template: Annual Report (Spotify Wrapped Style) -->
+    <template id="annual-report-view">
+        <div class="screen annual-report-screen slide-in pb-nav">
+            <header class="top-bar">
+                <i class="fas fa-arrow-left icon-btn" onclick="app.navigate('dashboard')"></i>
+                <h2 id="report-title">BROCALLME REPORT <span id="report-year"></span></h2>
+                <div class="spacer"></div>
+            </header>
+
+            <div class="wrapped-card mt-4 text-center">
+                <div class="wrapped-header">YOUR YEAR IN DISAPPOINTMENT</div>
+                <div class="wrapped-stat mt-4">
+                    <div class="val" id="report-acc">0</div>
+                    <div class="lbl text-green">Calls Accepted</div>
+                </div>
+                <div class="wrapped-stat mt-4">
+                    <div class="val text-red" id="report-ign">0</div>
+                    <div class="lbl">Calls Ignored</div>
+                </div>
+                
+                <div class="wrapped-verdict mt-5">
+                    <div class="lbl">Current Life Trajectory:</div>
+                    <div class="val text-orange" id="report-trajectory">Concerning</div>
+                </div>
+            </div>
+
+            <div class="wrapped-card mt-4">
+                <h3 class="wrapped-section-title">Relationship Health</h3>
+                <div class="health-list mt-3" id="health-list">
+                    <!-- JS fills this -->
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template: Add Person -->
+    <template id="add-person-view">
+        <div class="screen add-person-screen slide-in pb-nav">
+            <header class="top-bar">
+                <i class="fas fa-arrow-left icon-btn" onclick="app.navigate('dashboard')"></i>
+                <h2>Add Person</h2>
+                <div class="spacer"></div>
+            </header>
+
+            <div class="glass-card mt-4">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="add-name" placeholder="e.g. Rahul">
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label>Role</label>
+                    <input type="text" id="add-role" placeholder="e.g. Roommate">
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label>Avatar Emoji (Fallback)</label>
+                    <input type="text" id="add-emoji" placeholder="e.g. 🧑‍💻" maxlength="4">
+                </div>
+
+                <div class="form-group mt-3">
+                    <label>Voice Profile</label>
+                    <div class="time-pills">
+                        <div class="pill active" data-voice="male">Male</div>
+                        <div class="pill" data-voice="female">Female</div>
+                    </div>
+                </div>
+
+                <button class="btn-gradient btn-full mt-4" id="save-person-btn">Save Contact</button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template: Incoming Call -->
+    <template id="incoming-call-view">
+        <div class="screen call-screen slide-up">
+            <!-- Background Blur -->
+            <div class="call-bg-blur" id="incoming-bg"></div>
+            
+            <div class="call-top mt-5 z-relative">
+                <p class="call-subtitle mb-2 text-secondary" id="incoming-subtitle" style="font-size: 18px; letter-spacing: 2px;">INCOMING CALL</p>
+                <h1 class="call-name" id="incoming-name">NAME</h1>
+                <div id="incoming-mood-tag" class="mt-3"></div>
+            </div>
+
+            <div class="call-center z-relative">
+                <div id="escalation-alert" class="escalation-alert hidden">
+                    <span class="text-red font-weight-bold">Level <span id="esc-level"></span></span>
+                    <p class="mt-1" id="esc-text" style="font-size: 14px;"></p>
+                </div>
+                
+                <div class="portrait-huge-wrap" id="incoming-portrait-wrap">
+                    <img src="" id="incoming-img" class="portrait-huge pulse-ring" alt="Caller">
+                    <div class="avatar-fallback portrait-huge pulse-ring" id="incoming-fallback" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div class="call-bottom z-relative mb-5">
+                <div class="action-btn-wrapper">
+                    <button id="decline-btn" class="call-action-btn bg-red"><i class="fas fa-phone-slash"></i></button>
+                </div>
+                <div class="action-btn-wrapper">
+                    <button id="accept-btn" class="call-action-btn bg-green pulse"><i class="fas fa-phone"></i></button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template: Active Call -->
+    <template id="active-call-view">
+        <div class="screen call-screen slide-up">
+            <!-- Background Blur -->
+            <div class="call-bg-blur" id="active-bg"></div>
+            
+            <div class="call-top mt-5 z-relative">
+                <h1 class="call-name" id="active-name" style="font-size: 28px;">NAME</h1>
+                <p class="call-timer text-secondary" id="active-timer">00:00</p>
+                <div id="active-mood-tag" class="mt-2"></div>
+            </div>
+
+            <div class="call-center z-relative">
+                <div class="portrait-huge-wrap breathing" id="active-portrait-wrap">
+                    <img src="" id="active-img" class="portrait-huge" alt="Caller">
+                    <div class="avatar-fallback portrait-huge" id="active-fallback" style="display: none;"></div>
+                </div>
+                
+                <div class="dialogue-display mt-5">
+                    <div class="waveform mb-3 justify-content-center">
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    </div>
+                    <p id="active-dialogue" style="font-size: 22px; font-weight: 500;">...</p>
+                </div>
+            </div>
+
+            <div class="call-bottom active-bottom z-relative mb-4">
+                <div class="action-btn-wrapper">
+                    <button id="speaker-btn" class="call-action-btn bg-dark"><i class="fas fa-volume-up"></i></button>
+                    <span>Speaker</span>
+                </div>
+                <div class="action-btn-wrapper">
+                    <button id="end-call-btn" class="call-action-btn bg-red large"><i class="fas fa-phone-slash"></i></button>
+                    <span>End Call</span>
+                </div>
+                <div class="action-btn-wrapper">
+                    <button id="mute-btn" class="call-action-btn bg-dark"><i class="fas fa-microphone-slash"></i></button>
+                    <span>Mute</span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -54,8 +54,8 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 | 15 | AI Strategy Automation | Web Scraping, Gemini Pro, Next.js | [SMEPay Scout](projects/smepay_scout) |
 | 16 | Hardware Integration | WebSockets, Web Audio API, Python | [FoldDeck Pro](projects/FoldDeck) |
 | 17 | CipherLab OS | Next.js, Cryptography, Retro UI, State Management | [CipherLab (Live)](https://cipherlab-six.vercel.app) |
-| 18 | Product Analytics | Data seeding, user metrics, admin dashboard | Admin Dashboard |
-| 19 | Smart Expense Tracker | Spend forecasting, anomaly detection | Expense Tracker |
+| 18 | B2B Utility Products | React, PDF Generation | [SMEPay Invoice Generator](https://www.smepay.io/business-tools/invoice-generator) |
+| 19 | Decision Science | Explainable AI, Next.js | [SonVest (Live)](https://app-topaz-five-67.vercel.app) |
 | 20 | Chrome Extensions | Manifest V3, site tracking browser APIs | FocusLens Extension |
 | 21 | Testing & Quality | Unit tests, mock API requests | Vitest |
 | 22 | Phase 3 Ship Day | Demo videos, documentation polish | Live Deployment |

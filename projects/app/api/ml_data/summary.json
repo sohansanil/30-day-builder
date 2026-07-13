@@ -1,0 +1,1 @@
+{"data_range": {"start": "2023-04-25", "end": "2026-07-08", "trading_days": 803}, "latest_close": 7482.71, "latest_date": "2026-07-08", "overall_return": 83.8, "avg_annual_volatility": 13.4, "max_drawdown": -18.9, "current_regime": "Bear Market", "models_trained": ["HMM", "GMM", "KMeans"], "features_count": 12}
