@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createRouter, publicQuery } from "../middleware";
+import { createRouter, publicQuery } from "../middleware.js";
 import { TRPCError } from "@trpc/server";
 
 export const missionsRouter = createRouter({

@@ -1,7 +1,7 @@
-import { createRouter, publicQuery } from "./middleware";
-import { marketRouter } from "./routers/market";
-import { modelsRouter } from "./routers/models";
-import { missionsRouter } from "./routers/missions";
+import { createRouter, publicQuery } from "./middleware.js";
+import { marketRouter } from "./routers/market.js";
+import { modelsRouter } from "./routers/models.js";
+import { missionsRouter } from "./routers/missions.js";
 
 export const appRouter = createRouter({
   ping: publicQuery.query(() => ({ ok: true, ts: Date.now() })),
