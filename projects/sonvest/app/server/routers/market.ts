@@ -1,15 +1,8 @@
 import { z } from "zod";
 import { createRouter, publicQuery } from "../middleware.js";
-import * as fs from "fs";
-import * as path from "path";
-
-const ML_DATA_DIR = path.join(process.cwd(), "api", "ml_data");
-
-function loadJson<T>(filename: string): T {
-  const filePath = path.join(ML_DATA_DIR, filename);
-  const data = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(data) as T;
-}
+import summaryData from "../ml_data/summary.json" with { type: "json" };
+import currentStateData from "../ml_data/current_state.json" with { type: "json" };
+import dailyDataJson from "../ml_data/daily_data.json" with { type: "json" };
 
 // ── types matching the JSON output ──────────────────────────
 interface DailyDataPoint {
@@ -59,11 +52,11 @@ interface Summary {
 
 export const marketRouter = createRouter({
   summary: publicQuery.query((): Summary => {
-    return loadJson<Summary>("summary.json");
+    return summaryData as any as Summary;
   }),
 
   currentState: publicQuery.query((): CurrentState => {
-    return loadJson<CurrentState>("current_state.json");
+    return currentStateData as any as CurrentState;
   }),
 
   dailyData: publicQuery
@@ -75,7 +68,7 @@ export const marketRouter = createRouter({
       })
     )
     .query(({ input }): DailyDataPoint[] => {
-      const data = loadJson<DailyDataPoint[]>("daily_data.json");
+      const data = dailyDataJson as any as DailyDataPoint[];
       let filtered = data;
 
       if (input.startDate) {
@@ -89,7 +82,7 @@ export const marketRouter = createRouter({
     }),
 
   regimeDistribution: publicQuery.query(() => {
-    const data = loadJson<DailyDataPoint[]>("daily_data.json");
+    const data = dailyDataJson as any as DailyDataPoint[];
     const distribution: Record<string, { count: number; percentage: number; color: string }> = {};
 
     for (const d of data) {

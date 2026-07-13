@@ -1,15 +1,7 @@
 import { z } from "zod";
 import { createRouter, publicQuery } from "../middleware.js";
-import * as fs from "fs";
-import * as path from "path";
-
-const ML_DATA_DIR = path.join(process.cwd(), "api", "ml_data");
-
-function loadJson<T>(filename: string): T {
-  const filePath = path.join(ML_DATA_DIR, filename);
-  const data = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(data) as T;
-}
+import comparisonData from "../ml_data/model_comparison.json" with { type: "json" };
+import featureImportanceData from "../ml_data/feature_importance.json" with { type: "json" };
 
 interface RegimeInfo {
   regime_id: number;
@@ -56,7 +48,7 @@ interface FeatureImportanceItem {
 
 export const modelsRouter = createRouter({
   comparison: publicQuery.query((): ModelComparison => {
-    return loadJson<ModelComparison>("model_comparison.json");
+    return comparisonData as any as ModelComparison;
   }),
 
   featureImportance: publicQuery
@@ -66,7 +58,7 @@ export const modelsRouter = createRouter({
       })
     )
     .query(({ input }): FeatureImportanceItem[] => {
-      const data = loadJson<FeatureImportanceItem[]>("feature_importance.json");
+      const data = featureImportanceData as any as FeatureImportanceItem[];
       if (input.regimeId !== undefined) {
         return data.filter((d) => d.regime_id === input.regimeId);
       }
@@ -74,7 +66,7 @@ export const modelsRouter = createRouter({
     }),
 
   transitionMatrix: publicQuery.query(() => {
-    const comparison = loadJson<ModelComparison>("model_comparison.json");
+    const comparison = comparisonData as any as ModelComparison;
     const hmm = comparison.models.find((m) => m.id === "hmm");
     return {
       regimes: hmm?.regimes.map((r) => ({ id: r.regime_id, name: r.name, color: r.color })) ?? [],
