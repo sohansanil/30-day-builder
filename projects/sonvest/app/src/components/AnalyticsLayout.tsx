@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router";
-import { Activity, BarChart3, Play, Brain, ArrowRight } from "lucide-react";
+import { Activity, BarChart3, Play, Brain, ArrowRight, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function AnalyticsLayout({ children }: { children: React.ReactNode }) {
@@ -10,6 +10,7 @@ export default function AnalyticsLayout({ children }: { children: React.ReactNod
     { path: "/analytics/models", label: "Models", icon: Brain },
     { path: "/analytics/replay", label: "Replay", icon: Play },
     { path: "/analytics/scanner", label: "Scanner", icon: Activity },
+    { path: "/analytics/academy", label: "Academy", icon: BookOpen },
   ];
 
   return (

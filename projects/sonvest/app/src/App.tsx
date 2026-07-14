@@ -7,6 +7,7 @@ import Models from './pages/Models'
 import Replay from './pages/Replay'
 import CaseFile from './pages/CaseFile'
 import Scanner from './pages/Scanner'
+import Academy from './pages/Academy'
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="models" element={<Models />} />
             <Route path="replay" element={<Replay />} />
             <Route path="scanner" element={<Scanner />} />
+            <Route path="academy" element={<Academy />} />
           </Routes>
         </AnalyticsLayout>
       } />
