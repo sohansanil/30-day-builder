@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Target, Medal, Trophy } from "lucide-react";
+import { Target } from "lucide-react";
 
 export default function CasesLayout({ children }: { children: React.ReactNode }) {
   // In the real app, we would only show these after they earn them.

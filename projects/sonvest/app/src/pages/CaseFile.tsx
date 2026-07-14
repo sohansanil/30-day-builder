@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router";
 import { trpc } from "@/providers/trpc";
-import { Activity, ArrowRight, Brain, AlertCircle } from "lucide-react";
+import { Activity, ArrowRight, Brain, AlertCircle, TrendingUp, TrendingDown, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function CaseFile() {
@@ -12,6 +12,7 @@ export default function CaseFile() {
   const [step, setStep] = useState(1);
   const [selectedDecision, setSelectedDecision] = useState<string | null>(null);
   const [selectedReasoning, setSelectedReasoning] = useState<string | null>(null);
+  const [showAdvisors, setShowAdvisors] = useState(false);
 
   const reasoningOptions = [
     { id: "undervalued", label: "Fundamentally undervalued despite the noise." },
@@ -148,6 +149,75 @@ export default function CaseFile() {
               </span>
             </p>
           </div>
+        </div>
+      )}
+
+      {/* STEP 3.5: AGENT ADVISORS (NEW) */}
+      {step >= 3 && step < 6 && (
+        <div className="mb-12 animate-in slide-in-from-bottom-4 fade-in duration-500">
+          {!showAdvisors ? (
+            <div className="border border-zinc-800 bg-zinc-950 p-6 flex flex-col sm:flex-row gap-4 items-center justify-between group">
+              <div>
+                <h3 className="text-emerald-500 font-bold tracking-widest uppercase text-sm mb-1">Consult Advisors</h3>
+                <p className="text-zinc-400 text-sm">Need help? Hear what our AI Bull and Bear agents have to say before deciding.</p>
+              </div>
+              <Button 
+                onClick={() => setShowAdvisors(true)}
+                className="bg-zinc-800 hover:bg-zinc-700 text-zinc-100 font-bold tracking-widest uppercase border border-zinc-700 whitespace-nowrap"
+              >
+                Summon Agents <Brain className="w-4 h-4 ml-2" />
+              </Button>
+            </div>
+          ) : (
+            <div className="space-y-8 animate-in fade-in zoom-in-95">
+              <div className="text-center mb-6 border-b border-zinc-800 pb-4">
+                <h3 className="text-lg font-bold tracking-widest text-zinc-100 uppercase">Agent Arena</h3>
+                <p className="text-zinc-500 text-sm mt-1">Two opposing views. You decide the winner.</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* BULL AGENT */}
+                <div className="border border-emerald-900/50 bg-emerald-950/10 p-6 relative">
+                  <div className="absolute -top-3 -left-3 bg-zinc-950 border border-emerald-500/50 p-2 rounded-full shadow-lg shadow-emerald-500/10">
+                    <TrendingUp className="w-5 h-5 text-emerald-400" />
+                  </div>
+                  <h4 className="text-emerald-400 font-bold tracking-widest uppercase mb-4 ml-4">The Bull Thesis</h4>
+                  <p className="text-zinc-300 text-sm leading-relaxed">
+                    "{mission.bull_thesis || "The long-term growth potential far outweighs current concerns. I strongly recommend buying."}"
+                  </p>
+                </div>
+                
+                {/* BEAR AGENT */}
+                <div className="border border-rose-900/50 bg-rose-950/10 p-6 relative">
+                  <div className="absolute -top-3 -right-3 bg-zinc-950 border border-rose-500/50 p-2 rounded-full shadow-lg shadow-rose-500/10">
+                    <TrendingDown className="w-5 h-5 text-rose-400" />
+                  </div>
+                  <h4 className="text-rose-400 font-bold tracking-widest uppercase mb-4 text-right mr-4">The Bear Thesis</h4>
+                  <p className="text-zinc-300 text-sm leading-relaxed">
+                    "{mission.bear_thesis || "The momentum is collapsing and downside risk is massive. I strongly recommend selling."}"
+                  </p>
+                </div>
+              </div>
+
+              {/* JARGON BUSTER (Educational Component) */}
+              {mission.glossary && mission.glossary.length > 0 && (
+                <div className="mt-8 border border-zinc-800 bg-zinc-900/50 p-6">
+                  <div className="flex items-center gap-2 mb-4 text-blue-400">
+                    <BookOpen className="w-4 h-4" />
+                    <h4 className="font-bold tracking-widest uppercase text-sm">Jargon Buster</h4>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {mission.glossary.map((g: any, idx: number) => (
+                      <div key={idx} className="bg-zinc-950 border border-zinc-800 p-4 hover:border-blue-500/50 transition-colors">
+                        <p className="text-blue-400 font-bold text-sm tracking-wide mb-2">{g.term}</p>
+                        <p className="text-zinc-400 text-xs leading-relaxed">{g.definition}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
 
