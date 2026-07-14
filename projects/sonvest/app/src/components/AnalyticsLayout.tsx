@@ -9,6 +9,7 @@ export default function AnalyticsLayout({ children }: { children: React.ReactNod
     { path: "/analytics", label: "Dashboard", icon: Activity },
     { path: "/analytics/models", label: "Models", icon: Brain },
     { path: "/analytics/replay", label: "Replay", icon: Play },
+    { path: "/analytics/scanner", label: "Scanner", icon: Activity },
   ];
 
   return (
