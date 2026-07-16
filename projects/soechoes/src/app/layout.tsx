@@ -26,12 +26,27 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://soechoes.vercel.app'),
   title: 'SoEchoes — A map of the places that changed us.',
   description: 'An anonymous memory archive of the places that shaped us during the strangest years of our lives.',
   openGraph: {
     title: 'SoEchoes',
     description: 'A map of the places that changed us.',
     type: 'website',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'SoEchoes — A map of the places that changed us.',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SoEchoes',
+    description: 'A map of the places that changed us.',
+    images: ['/opengraph-image.png'],
   },
 };
 

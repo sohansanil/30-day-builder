@@ -251,6 +251,11 @@ h1, h2, h3 {
   100% { transform: scale(8) translateY(50%); opacity: 0; }
 }
 
+@keyframes spotPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+  50% { transform: translateX(-50%) scale(1.35); opacity: 0; }
+}
+
 /* Cluster Marker Brand Overrides */
 .marker-cluster-small,
 .marker-cluster-medium,

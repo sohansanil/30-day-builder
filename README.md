@@ -56,9 +56,9 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 | 17 | CipherLab OS | Next.js, Cryptography, Retro UI, State Management | [CipherLab (Live)](https://cipherlab-six.vercel.app) |
 | 18 | B2B Utility Products | React, PDF Generation | [SMEPay Invoice Generator](https://www.smepay.io/business-tools/invoice-generator) |
 | 19 | Decision Science | Explainable AI, Next.js | [SonVest (Live)](https://app-topaz-five-67.vercel.app) |
-| 20 | Chrome Extensions | Manifest V3, site tracking browser APIs | FocusLens Extension |
-| 21 | Testing & Quality | Unit tests, mock API requests | Vitest |
-| 22 | Phase 3 Ship Day | Demo videos, documentation polish | Live Deployment |
+| 20 | Micro-Frontend Architecture | Next.js Multi-Zones, React version isolation, Vercel proxying | SMEPay Merchant Docs |
+| 21 | SoEchoes Backend & Maps | Supabase, React Leaflet, Next.js | [SoEchoes (Live)](https://soechoes.vercel.app) |
+| 22 | SoEchoes UX Polish & OG Tags | Framer Motion, OpenGraph, UI | [SoEchoes (Live)](https://soechoes.vercel.app) |
 
 ### Phase 4: Advanced Products & Capstone (Days 23–30)
 > Progressive Web Apps, collaborative filtering, RAG, WebSockets, capstone

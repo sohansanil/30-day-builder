@@ -54,7 +54,7 @@ function createPinIcon(memory: Memory, isNewlyAdded?: boolean) {
     html,
     className: '',
     iconSize: [size, size],
-    iconAnchor: [size / 2, size], // anchor at bottom center
+    iconAnchor: [size / 2, size],
   });
 }
 
@@ -66,7 +66,7 @@ function createDraftPinIcon() {
     html,
     className: '',
     iconSize: [32, 32],
-    iconAnchor: [16, 32], // anchor at bottom center
+    iconAnchor: [16, 32],
   });
 }
 
@@ -101,7 +101,7 @@ function MapEvents({
 // ── Main MapView ─────────────────────────────────────────────
 interface MapViewProps {
   memories: Memory[];
-  flyTarget?: { lat: number; lng: number; trigger?: number } | null;
+  flyTarget?: { lat: number; lng: number; zoom?: number; trigger?: number } | null;
   onFlyComplete?: () => void;
   isPlacingPin?: boolean;
   draftLocation?: { lat: number; lng: number } | null;

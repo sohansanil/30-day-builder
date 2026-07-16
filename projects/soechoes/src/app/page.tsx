@@ -222,6 +222,7 @@ export default function LandingPage() {
                 maxWidth: '800px',
                 marginBottom: '24px',
                 textAlign: 'center',
+                textShadow: '0 0 40px rgba(244,239,230,0.9), 0 2px 20px rgba(244,239,230,0.8), 0 0 80px rgba(244,239,230,0.6)',
               }}
             >
               A map of the places<br />that changed us.
@@ -234,15 +235,19 @@ export default function LandingPage() {
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: '16px',
-                color: '#4a443c',
+                color: '#3a342e',
                 marginBottom: '44px',
                 maxWidth: '400px',
                 lineHeight: 1.6,
-                fontWeight: 500,
+                fontWeight: 600,
                 textAlign: 'center',
+                textShadow: '0 0 30px rgba(244,239,230,0.95), 0 2px 16px rgba(244,239,230,0.9)',
               }}
             >
-              A collaborative scrapbook of young adulthood.<br />Anonymous, no logins, just places and feelings.
+              A collaborative scrapbook of young adulthood.
+              <br className="hidden sm:block" />
+              <span className="sm:hidden"> </span>
+              Anonymous, no logins, just places.
             </motion.p>
 
             {/* CTA buttons */}
@@ -381,11 +386,11 @@ export default function LandingPage() {
               </p>
             </BlurFade>
 
-            {/* Polaroid grid */}
+            {/* Polaroid grid — responsive: 1 col mobile, auto-fill desktop */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-              gap: '40px',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(260px, 100%), 1fr))',
+              gap: '32px',
               padding: '16px 0 24px',
             }}>
               {memories.map((m, i) => (
