@@ -65,7 +65,7 @@ I'm a 3rd-year Data Science & Engineering student preparing for placement season
 
 | Day | Focus | What I Learned | Project |
 |-----|-------|---------------|---------|
-| 23 | PWA & Offline Support | Service workers, IndexedDB, offline sync | PWA Expense Tracker |
+| 23 | RAG & Legal AI | Hybrid Search, pgvector, WASM Embeddings | [WhatAreMyRights (Live)](https://whataremyrights.vercel.app) |
 | 24 | Recommendation Engines | Content-based & collaborative filtering | CourseCompass |
 | 25 | Document AI & RAG | Embeddings, vector search, retrieval loops | ResearchBuddy RAG |
 | 26 | Real-time Data | WebSockets, Supabase Realtime | Live Predictions |
